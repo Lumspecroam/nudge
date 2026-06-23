@@ -7,39 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1BCE59A82665C64C82D61C /* SnapOverlayWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37AB5A2D0E748A35AC93CE /* SnapOverlayWindow.swift */; };
 		0E31B07398367CC729EAB9D7 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE29C012FD7CBDF9229AEE6 /* WindowManager.swift */; };
+		11F8110FD3282CEA7D95CE0D /* SkyLightBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */; };
+		1C818D52F2C8F98E643CFA29 /* DragSnapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88D8B5EAD1EEF756D628ADF /* DragSnapManager.swift */; };
+		263EDE01D9C3A0EF0F4BB1AB /* UserPreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E09B912C129D2FE33B3779F /* UserPreferencesTests.swift */; };
+		2B886279A89C7DD6B7FFA646 /* FileLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B315791F0D60A8A9EACBF5AD /* FileLog.swift */; };
 		31E503DAC866BD062AE7B86B /* DragSnapZoneDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D5547BAC8324EC7CE56B8 /* DragSnapZoneDetectionTests.swift */; };
-		4FB18FE439AAA08C6CD76B2E /* SkyLightBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BEBD19D2F27C0A5EE4846F /* SkyLightBridge.swift */; };
+		3C2A3B3E95A322CF613446DD /* KeyRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE831E6AC17D70395D458 /* KeyRecorderView.swift */; };
+		3DCDC7DFC1E9EF80DF36A098 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF5452511B5430A6199287E /* UserPreferences.swift */; };
 		54843A40C0A5530ADB2BF2BD /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF5452511B5430A6199287E /* UserPreferences.swift */; };
 		5510B0B39D0CEB5E997CCBC3 /* SnapActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FEE976A494EF28079ED9FF /* SnapActionTests.swift */; };
+		58089AA7F64F65F7398BB1BA /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD4EA8C359F6394C3B78DBD /* PreferencesWindow.swift */; };
 		65A59ED455AA9AEB9683A2F1 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC0DF7C25F6B121DB9C7F2 /* StatusBarController.swift */; };
+		6A9A1FAE2A79756E2E954DB5 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE29C012FD7CBDF9229AEE6 /* WindowManager.swift */; };
 		6EC4BEEA1A4A3E5003360DEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBB036BAB62057DE45BBEC7F /* Assets.xcassets */; };
+		711CD30AB1206F8AC3B92383 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC0DF7C25F6B121DB9C7F2 /* StatusBarController.swift */; };
 		71EC31D05E3F050EDC6214D5 /* DragSnapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88D8B5EAD1EEF756D628ADF /* DragSnapManager.swift */; };
+		7915EAD7FE1CA225500541F4 /* FileLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B315791F0D60A8A9EACBF5AD /* FileLog.swift */; };
 		7A376DE43562EEBAD07755BC /* AccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8737084F2E2A1667E9F1489 /* AccessibilityHelper.swift */; };
 		7B542C6EB6278E0047D6439E /* SnapOverlayWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37AB5A2D0E748A35AC93CE /* SnapOverlayWindow.swift */; };
-		8F33E5DB8197918F878FF425 /* FileLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61655849A25B82399ADF40FB /* FileLog.swift */; };
+		80737C38EAAA54BAF48C2A83 /* SnapZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ABE84E0BA0C6951989EE5D /* SnapZone.swift */; };
+		853D00A7D0B3B79BB4A19921 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D56577D6C19F75C04089C /* Analytics.swift */; };
+		8A4075B97375B65CDCBEC997 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94958E79F696A47AFE35453 /* HotkeyManager.swift */; };
+		904FCED0325EC9C91E8CDCB8 /* SnapAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDCAA75D7385ECAD476425C /* SnapAction.swift */; };
 		909BCD93AFD46C773D5E71DB /* SnapZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D4E4EF90EFC59610EE29C /* SnapZoneTests.swift */; };
 		95D933E09487CFF3879AB788 /* SnapZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ABE84E0BA0C6951989EE5D /* SnapZone.swift */; };
 		968B729F6A1F6B499476E4D8 /* KeyRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE831E6AC17D70395D458 /* KeyRecorderView.swift */; };
+		A6D1403F513BB664E3C1253D /* SkyLightBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */; };
 		A7D6B80D3E09D0264DE6927D /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D56577D6C19F75C04089C /* Analytics.swift */; };
 		AF7E495CC449C994537F5588 /* DisplayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDE59251F0C7A9B8CD98F7 /* DisplayHelper.swift */; };
+		B72507C996E62FFFFA32B475 /* SnapIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED4F73875F9529901D0E2E0 /* SnapIconGenerator.swift */; };
 		B7B8741FBCC74378160250DE /* SnapIconGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ED4F73875F9529901D0E2E0 /* SnapIconGenerator.swift */; };
+		BB8346CF9DD7645C434AD822 /* DragGestureClassifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E89CF0C12E3E02A7B684AA /* DragGestureClassifierTests.swift */; };
+		CE95B9FB7C25A90417FDF1DB /* KeyRecorderViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D939DF5A81E4DDBA106FDC69 /* KeyRecorderViewTests.swift */; };
 		DE3533CA56943B3B261376A0 /* SnapAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDCAA75D7385ECAD476425C /* SnapAction.swift */; };
 		E7D19AECD271724EBF00359E /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94958E79F696A47AFE35453 /* HotkeyManager.swift */; };
 		EFA09A06F2C0A8B9EAADBD25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD61E0B5184F594FAACB7628 /* AppDelegate.swift */; };
 		F6368D66B74679CC63ADEE3C /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD4EA8C359F6394C3B78DBD /* PreferencesWindow.swift */; };
+		FD25D47F57E88D7190055502 /* DisplayHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBDE59251F0C7A9B8CD98F7 /* DisplayHelper.swift */; };
+		FEA5299DF4E3C1D7F95EB135 /* AccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8737084F2E2A1667E9F1489 /* AccessibilityHelper.swift */; };
 		FF59BC71041F091E9F5D6DE3 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CD03E252863E66AC5FFD93F /* main.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5F74D6327E4C2A699D52C28D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C28573022B4A67500B2C4905 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E9E92F0A21CDCFEAB5D38D71;
-			remoteInfo = Nudge;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1530B006B4B46598CB828806 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -49,22 +58,25 @@
 		31FEE976A494EF28079ED9FF /* SnapActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapActionTests.swift; sourceTree = "<group>"; };
 		3DBDE59251F0C7A9B8CD98F7 /* DisplayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayHelper.swift; sourceTree = "<group>"; };
 		3ED4F73875F9529901D0E2E0 /* SnapIconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapIconGenerator.swift; sourceTree = "<group>"; };
+		41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyLightBridge.swift; sourceTree = "<group>"; };
 		50361DA1FBA39934BD3333ED /* Nudge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nudge.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		61655849A25B82399ADF40FB /* FileLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLog.swift; sourceTree = "<group>"; };
 		7405730654BA450CB29B76DC /* Nudge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nudge.entitlements; sourceTree = "<group>"; };
 		7B6D5547BAC8324EC7CE56B8 /* DragSnapZoneDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragSnapZoneDetectionTests.swift; sourceTree = "<group>"; };
 		7C37AB5A2D0E748A35AC93CE /* SnapOverlayWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapOverlayWindow.swift; sourceTree = "<group>"; };
+		7E09B912C129D2FE33B3779F /* UserPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesTests.swift; sourceTree = "<group>"; };
 		811D56577D6C19F75C04089C /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		9B2EE831E6AC17D70395D458 /* KeyRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRecorderView.swift; sourceTree = "<group>"; };
 		9FF5452511B5430A6199287E /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		B315791F0D60A8A9EACBF5AD /* FileLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLog.swift; sourceTree = "<group>"; };
 		B4BC0DF7C25F6B121DB9C7F2 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		B6E89CF0C12E3E02A7B684AA /* DragGestureClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragGestureClassifierTests.swift; sourceTree = "<group>"; };
 		B8737084F2E2A1667E9F1489 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
 		C8ABE84E0BA0C6951989EE5D /* SnapZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapZone.swift; sourceTree = "<group>"; };
+		D939DF5A81E4DDBA106FDC69 /* KeyRecorderViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRecorderViewTests.swift; sourceTree = "<group>"; };
 		D94958E79F696A47AFE35453 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
 		DBB036BAB62057DE45BBEC7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDD4EA8C359F6394C3B78DBD /* PreferencesWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindow.swift; sourceTree = "<group>"; };
 		E16D4E4EF90EFC59610EE29C /* SnapZoneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapZoneTests.swift; sourceTree = "<group>"; };
-		E4BEBD19D2F27C0A5EE4846F /* SkyLightBridge.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SkyLightBridge.swift; sourceTree = "<group>"; };
 		E76839C99030AD6A563C1705 /* NudgeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NudgeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E88D8B5EAD1EEF756D628ADF /* DragSnapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragSnapManager.swift; sourceTree = "<group>"; };
 		FD61E0B5184F594FAACB7628 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -74,9 +86,12 @@
 		340B85688A3E21AFC6440EB1 /* NudgeTests */ = {
 			isa = PBXGroup;
 			children = (
+				B6E89CF0C12E3E02A7B684AA /* DragGestureClassifierTests.swift */,
 				7B6D5547BAC8324EC7CE56B8 /* DragSnapZoneDetectionTests.swift */,
+				D939DF5A81E4DDBA106FDC69 /* KeyRecorderViewTests.swift */,
 				31FEE976A494EF28079ED9FF /* SnapActionTests.swift */,
 				E16D4E4EF90EFC59610EE29C /* SnapZoneTests.swift */,
+				7E09B912C129D2FE33B3779F /* UserPreferencesTests.swift */,
 			);
 			path = NudgeTests;
 			sourceTree = "<group>";
@@ -107,8 +122,8 @@
 				B8737084F2E2A1667E9F1489 /* AccessibilityHelper.swift */,
 				811D56577D6C19F75C04089C /* Analytics.swift */,
 				3DBDE59251F0C7A9B8CD98F7 /* DisplayHelper.swift */,
-				61655849A25B82399ADF40FB /* FileLog.swift */,
-				E4BEBD19D2F27C0A5EE4846F /* SkyLightBridge.swift */,
+				B315791F0D60A8A9EACBF5AD /* FileLog.swift */,
+				41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -179,9 +194,10 @@
 			buildRules = (
 			);
 			dependencies = (
-				2F965375C473C14EE52D75A2 /* PBXTargetDependency */,
 			);
 			name = NudgeTests;
+			packageProductDependencies = (
+			);
 			productName = NudgeTests;
 			productReference = E76839C99030AD6A563C1705 /* NudgeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -198,6 +214,8 @@
 			dependencies = (
 			);
 			name = Nudge;
+			packageProductDependencies = (
+			);
 			productName = Nudge;
 			productReference = 50361DA1FBA39934BD3333ED /* Nudge.app */;
 			productType = "com.apple.product-type.application";
@@ -212,12 +230,12 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					A742DCEC817F42A1604B38E8 = {
-						DevelopmentTeam = REDACTED;
+						DevelopmentTeam = "$(NUDGE_TEAM_ID)";
 						ProvisioningStyle = Manual;
 					};
 					E9E92F0A21CDCFEAB5D38D71 = {
 						ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-						DevelopmentTeam = REDACTED;
+						DevelopmentTeam = "$(NUDGE_TEAM_ID)";
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -263,9 +281,11 @@
 				EFA09A06F2C0A8B9EAADBD25 /* AppDelegate.swift in Sources */,
 				AF7E495CC449C994537F5588 /* DisplayHelper.swift in Sources */,
 				71EC31D05E3F050EDC6214D5 /* DragSnapManager.swift in Sources */,
+				2B886279A89C7DD6B7FFA646 /* FileLog.swift in Sources */,
 				E7D19AECD271724EBF00359E /* HotkeyManager.swift in Sources */,
 				968B729F6A1F6B499476E4D8 /* KeyRecorderView.swift in Sources */,
 				F6368D66B74679CC63ADEE3C /* PreferencesWindow.swift in Sources */,
+				A6D1403F513BB664E3C1253D /* SkyLightBridge.swift in Sources */,
 				DE3533CA56943B3B261376A0 /* SnapAction.swift in Sources */,
 				B7B8741FBCC74378160250DE /* SnapIconGenerator.swift in Sources */,
 				7B542C6EB6278E0047D6439E /* SnapOverlayWindow.swift in Sources */,
@@ -274,8 +294,6 @@
 				54843A40C0A5530ADB2BF2BD /* UserPreferences.swift in Sources */,
 				0E31B07398367CC729EAB9D7 /* WindowManager.swift in Sources */,
 				FF59BC71041F091E9F5D6DE3 /* main.swift in Sources */,
-				8F33E5DB8197918F878FF425 /* FileLog.swift in Sources */,
-				4FB18FE439AAA08C6CD76B2E /* SkyLightBridge.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,21 +301,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FEA5299DF4E3C1D7F95EB135 /* AccessibilityHelper.swift in Sources */,
+				853D00A7D0B3B79BB4A19921 /* Analytics.swift in Sources */,
+				FD25D47F57E88D7190055502 /* DisplayHelper.swift in Sources */,
+				BB8346CF9DD7645C434AD822 /* DragGestureClassifierTests.swift in Sources */,
+				1C818D52F2C8F98E643CFA29 /* DragSnapManager.swift in Sources */,
 				31E503DAC866BD062AE7B86B /* DragSnapZoneDetectionTests.swift in Sources */,
+				7915EAD7FE1CA225500541F4 /* FileLog.swift in Sources */,
+				8A4075B97375B65CDCBEC997 /* HotkeyManager.swift in Sources */,
+				3C2A3B3E95A322CF613446DD /* KeyRecorderView.swift in Sources */,
+				CE95B9FB7C25A90417FDF1DB /* KeyRecorderViewTests.swift in Sources */,
+				58089AA7F64F65F7398BB1BA /* PreferencesWindow.swift in Sources */,
+				11F8110FD3282CEA7D95CE0D /* SkyLightBridge.swift in Sources */,
+				904FCED0325EC9C91E8CDCB8 /* SnapAction.swift in Sources */,
 				5510B0B39D0CEB5E997CCBC3 /* SnapActionTests.swift in Sources */,
+				B72507C996E62FFFFA32B475 /* SnapIconGenerator.swift in Sources */,
+				0A1BCE59A82665C64C82D61C /* SnapOverlayWindow.swift in Sources */,
+				80737C38EAAA54BAF48C2A83 /* SnapZone.swift in Sources */,
 				909BCD93AFD46C773D5E71DB /* SnapZoneTests.swift in Sources */,
+				711CD30AB1206F8AC3B92383 /* StatusBarController.swift in Sources */,
+				3DCDC7DFC1E9EF80DF36A098 /* UserPreferences.swift in Sources */,
+				263EDE01D9C3A0EF0F4BB1AB /* UserPreferencesTests.swift in Sources */,
+				6A9A1FAE2A79756E2E954DB5 /* WindowManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		2F965375C473C14EE52D75A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E9E92F0A21CDCFEAB5D38D71 /* Nudge */;
-			targetProxy = 5F74D6327E4C2A699D52C28D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		19C4E00F58A40EC76042F1B4 /* Release */ = {
@@ -337,7 +366,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = REDACTED;
+				DEVELOPMENT_TEAM = "$(NUDGE_TEAM_ID)";
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -350,7 +379,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Nudge/App/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -368,13 +396,14 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.nudge.NudgeTests;
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nudge.app/Contents/MacOS/Nudge";
 			};
 			name = Release;
 		};
@@ -386,10 +415,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_APP_SANDBOX = NO;
 				INFOPLIST_FILE = Nudge/App/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -399,13 +425,14 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = app.nudge.NudgeTests;
 				SDKROOT = macosx;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nudge.app/Contents/MacOS/Nudge";
 			};
 			name = Debug;
 		};
@@ -417,10 +444,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_APP_SANDBOX = NO;
 				INFOPLIST_FILE = Nudge/App/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -462,7 +486,7 @@
 				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = REDACTED;
+				DEVELOPMENT_TEAM = "$(NUDGE_TEAM_ID)";
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -481,7 +505,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = Nudge/App/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;

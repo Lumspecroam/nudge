@@ -13,7 +13,6 @@ settings:
     DEVELOPMENT_TEAM: $(NUDGE_TEAM_ID)
     CODE_SIGN_STYLE: Manual
     PRODUCT_BUNDLE_IDENTIFIER: app.nudge.Nudge
-    INFOPLIST_FILE: Nudge/App/Info.plist
     ENABLE_APP_SANDBOX: false
     ENABLE_HARDENED_RUNTIME: true
 targets:
@@ -49,9 +48,20 @@ targets:
     platform: macOS
     sources:
       - path: NudgeTests
-    dependencies:
-      - target: Nudge
+      - path: Nudge/Core
+      - path: Nudge/Helpers
+      - path: Nudge/Models
+      - path: Nudge/UI
     settings:
       base:
-        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/Nudge.app/Contents/MacOS/Nudge"
-        BUNDLE_LOADER: "$(TEST_HOST)"
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: app.nudge.NudgeTests
+schemes:
+  Nudge:
+    build:
+      targets:
+        Nudge: all
+        NudgeTests: [test]
+    test:
+      targets:
+        - NudgeTests

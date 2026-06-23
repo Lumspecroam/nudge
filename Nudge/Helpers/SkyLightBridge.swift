@@ -72,24 +72,6 @@ enum SkyLight {
 
     /// Find the main window ID for a PID using CGWindowList (including off-screen/non-standard windows)
     static func findMainWindow(pid: pid_t) -> UInt32? {
-        let windows = CGWindowListCopyWindowInfo(.optionAll, kCGNullWindowID) as? [[String: Any]] ?? []
-        var bestWid: UInt32?
-        var bestArea: CGFloat = 0
-
-        for info in windows {
-            guard let wPid = info[kCGWindowOwnerPID as String] as? pid_t, wPid == pid,
-                  let layer = info[kCGWindowLayer as String] as? Int, layer == 0,
-                  let widNum = info[kCGWindowNumber as String] as? Int,
-                  let bounds = info[kCGWindowBounds as String] as? [String: CGFloat] else { continue }
-            let wid = UInt32(widNum)
-            let w = bounds["Width"] ?? 0
-            let h = bounds["Height"] ?? 0
-            let area = w * h
-            if w > 50 && h > 50 && area > bestArea {
-                bestArea = area
-                bestWid = wid
-            }
-        }
-        return bestWid
+        findMainWindowWithBounds(pid: pid)?.wid
     }
 }

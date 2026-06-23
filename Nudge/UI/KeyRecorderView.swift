@@ -3,6 +3,8 @@ import Carbon
 
 final class KeyRecorderView: NSView {
     var onRecorded: ((UInt32, UInt32) -> Void)?
+    var onCleared: (() -> Void)?
+    var representedAction: SnapAction?
 
     private var isRecording = false
     private var displayLabel: NSTextField!
@@ -47,73 +49,92 @@ final class KeyRecorderView: NSView {
         ])
     }
 
-    func setShortcut(modifiers: UInt32, keyCode: UInt32) {
-        currentModifiers = modifiers
-        currentKeyCode = keyCode
-        displayLabel.stringValue = shortcutString(modifiers: modifiers, keyCode: keyCode)
-        clearButton.isHidden = false
+    var displayedText: String {
+        displayLabel.stringValue
+    }
+
+    func setShortcut(_ hotkey: Hotkey?) {
+        currentModifiers = hotkey?.modifiers ?? 0
+        currentKeyCode = hotkey?.keyCode ?? 0
+        renderCurrentShortcut()
     }
 
     override func mouseDown(with event: NSEvent) {
-        if isRecording { stopRecording() } else { startRecording() }
+        if isRecording { cancelRecording() } else { beginRecording() }
     }
 
     override func keyDown(with event: NSEvent) {
         guard isRecording else { super.keyDown(with: event); return }
-        if event.keyCode == UInt16(kVK_Escape) { stopRecording(); return }
+        if event.keyCode == UInt16(kVK_Escape) { cancelRecording(); return }
 
         let modifiers = carbonModifiers(from: event.modifierFlags)
         guard modifiers != 0 else { return }
 
         let keyCode = UInt32(event.keyCode)
+        let hotkey = Hotkey(modifiers: modifiers, keyCode: keyCode)
 
-        for action in SnapAction.allCases {
-            let existing = UserPreferences.shared.hotkey(for: action)
-            if existing.modifiers == modifiers && existing.keyCode == keyCode {
-                let alert = NSAlert()
-                alert.messageText = "Shortcut Conflict"
-                alert.informativeText = "This shortcut is already used by \"\(action.displayName)\"."
-                alert.alertStyle = .warning
-                alert.runModal()
-                stopRecording()
-                return
-            }
+        if let action = UserPreferences.shared.conflictingAction(for: hotkey, excluding: representedAction) {
+            let alert = NSAlert()
+            alert.messageText = "Shortcut Conflict"
+            alert.informativeText = "This shortcut is already used by \"\(action.displayName)\"."
+            alert.alertStyle = .warning
+            alert.runModal()
+            cancelRecording()
+            return
         }
 
         currentModifiers = modifiers
         currentKeyCode = keyCode
-        displayLabel.stringValue = shortcutString(modifiers: modifiers, keyCode: keyCode)
-        clearButton.isHidden = false
-        stopRecording()
+        finishRecording(resumeHotkeys: false)
         onRecorded?(modifiers, keyCode)
+        HotkeyManager.shared.resume()
     }
 
     override var acceptsFirstResponder: Bool { true }
 
-    private func startRecording() {
+    func beginRecording() {
+        guard !isRecording else { return }
         isRecording = true
         HotkeyManager.shared.pause()
         displayLabel.stringValue = "Type shortcut..."
         displayLabel.font = .systemFont(ofSize: 12)
-        layer?.borderColor = NSColor.systemBlue.cgColor
+        clearButton.isHidden = true
+        layer?.borderColor = NSColor.white.cgColor
         layer?.borderWidth = 2
         window?.makeFirstResponder(self)
     }
 
-    private func stopRecording() {
+    func cancelRecording() {
+        finishRecording(resumeHotkeys: true)
+    }
+
+    private func finishRecording(resumeHotkeys: Bool) {
+        guard isRecording else { return }
         isRecording = false
         displayLabel.font = .monospacedSystemFont(ofSize: 13, weight: .medium)
         layer?.borderColor = NSColor.separatorColor.cgColor
         layer?.borderWidth = 1
-        if currentModifiers == 0 { displayLabel.stringValue = "" }
-        HotkeyManager.shared.resume()
+        renderCurrentShortcut()
+        if resumeHotkeys {
+            HotkeyManager.shared.resume()
+        }
     }
 
-    @objc private func clearShortcut() {
+    @objc func clearShortcut() {
         currentModifiers = 0
         currentKeyCode = 0
-        displayLabel.stringValue = ""
-        clearButton.isHidden = true
+        renderCurrentShortcut()
+        onCleared?()
+    }
+
+    private func renderCurrentShortcut() {
+        if currentModifiers == 0 {
+            displayLabel.stringValue = ""
+            clearButton.isHidden = true
+        } else {
+            displayLabel.stringValue = shortcutString(modifiers: currentModifiers, keyCode: currentKeyCode)
+            clearButton.isHidden = false
+        }
     }
 
     private func carbonModifiers(from flags: NSEvent.ModifierFlags) -> UInt32 {

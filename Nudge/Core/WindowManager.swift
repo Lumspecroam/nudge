@@ -10,6 +10,7 @@ final class WindowManager {
 
     private var previousFrames: [String: CGRect] = [:]
     private var lastSnapAction: (windowID: String, action: SnapAction, screen: NSScreen)?
+    private let maxPreviousFrames = 64
 
     // MARK: - Get Focused Window
 
@@ -148,30 +149,46 @@ final class WindowManager {
 
     func getPosition(of window: AXUIElement) -> CGPoint? {
         var value: AnyObject?
-        guard AXUIElementCopyAttributeValue(window, kAXPositionAttribute as CFString, &value) == .success else { return nil }
+        guard AXUIElementCopyAttributeValue(window, kAXPositionAttribute as CFString, &value) == .success,
+              let value = value else { return nil }
+        let axValue = value as! AXValue
         var point = CGPoint.zero
-        AXValueGetValue(value as! AXValue, .cgPoint, &point)
+        guard AXValueGetValue(axValue, .cgPoint, &point) else { return nil }
         return point
     }
 
     func getSize(of window: AXUIElement) -> CGSize? {
         var value: AnyObject?
-        guard AXUIElementCopyAttributeValue(window, kAXSizeAttribute as CFString, &value) == .success else { return nil }
+        guard AXUIElementCopyAttributeValue(window, kAXSizeAttribute as CFString, &value) == .success,
+              let value = value else { return nil }
+        let axValue = value as! AXValue
         var size = CGSize.zero
-        AXValueGetValue(value as! AXValue, .cgSize, &size)
+        guard AXValueGetValue(axValue, .cgSize, &size) else { return nil }
         return size
     }
 
     func setPosition(of window: AXUIElement, to point: CGPoint) {
         var p = point
-        let value = AXValueCreate(.cgPoint, &p)!
-        AXUIElementSetAttributeValue(window, kAXPositionAttribute as CFString, value)
+        guard let value = AXValueCreate(.cgPoint, &p) else {
+            FileLog.write("setPosition: AXValueCreate failed for point")
+            return
+        }
+        let status = AXUIElementSetAttributeValue(window, kAXPositionAttribute as CFString, value)
+        if status != .success {
+            FileLog.write("setPosition: AXUIElementSetAttributeValue failed status=\(status)")
+        }
     }
 
     func setSize(of window: AXUIElement, to size: CGSize) {
         var s = size
-        let value = AXValueCreate(.cgSize, &s)!
-        AXUIElementSetAttributeValue(window, kAXSizeAttribute as CFString, value)
+        guard let value = AXValueCreate(.cgSize, &s) else {
+            FileLog.write("setSize: AXValueCreate failed for size")
+            return
+        }
+        let status = AXUIElementSetAttributeValue(window, kAXSizeAttribute as CFString, value)
+        if status != .success {
+            FileLog.write("setSize: AXUIElementSetAttributeValue failed status=\(status)")
+        }
     }
 
     // MARK: - Move Window to Frame
@@ -180,10 +197,20 @@ final class WindowManager {
         if let currentFrame = getFrame(of: window),
            let windowID = getWindowID(of: window) {
             previousFrames[windowID] = currentFrame
+            trimPreviousFramesIfNeeded()
         }
         disableEnhancedUI(for: window)
         setPosition(of: window, to: frame.origin)
         setSize(of: window, to: frame.size)
+    }
+
+    private func trimPreviousFramesIfNeeded() {
+        guard previousFrames.count > maxPreviousFrames else { return }
+        // Remove oldest entries (arbitrary order since dict is unordered, but bounds growth)
+        let keysToRemove = Array(previousFrames.keys.prefix(previousFrames.count - maxPreviousFrames))
+        for key in keysToRemove {
+            previousFrames.removeValue(forKey: key)
+        }
     }
 
     /// Disable AXEnhancedUserInterface on the app — Chrome/Chromium enables this
@@ -227,15 +254,27 @@ final class WindowManager {
         let visible = screen.visibleFrame
         let newWidth = visible.width * 0.7
         let newHeight = visible.height * 0.7
+
+        // Save current (maximized) frame so user can undo this restore
+        if let windowID = getWindowID(of: window) {
+            previousFrames[windowID] = frame
+            trimPreviousFramesIfNeeded()
+        }
+
         let cgX: CGFloat
         let cgY: CGFloat
         if let cursor = cursorCG {
             cgX = cursor.x - newWidth / 2
             cgY = cursor.y
         } else {
-            guard let mainScreen = NSScreen.screens.first else { return }
-            cgX = visible.minX + (visible.width - newWidth) / 2
-            cgY = mainScreen.frame.height - (visible.minY + (visible.height - newHeight) / 2) - newHeight
+            let nsTarget = CGRect(
+                x: visible.minX + (visible.width - newWidth) / 2,
+                y: visible.minY + (visible.height - newHeight) / 2,
+                width: newWidth, height: newHeight
+            )
+            let cgTarget = convertToCG(nsFrame: nsTarget, screen: screen)
+            cgX = cgTarget.minX
+            cgY = cgTarget.minY
         }
         setSize(of: window, to: CGSize(width: newWidth, height: newHeight))
         setPosition(of: window, to: CGPoint(x: cgX, y: cgY))
@@ -288,6 +327,7 @@ final class WindowManager {
                     let cgFrame = convertToCG(nsFrame: targetFrame, screen: currentScreen)
                     let key = "\(pid)-\(wid)"
                     previousFrames[key] = currentBounds
+                    trimPreviousFramesIfNeeded()
                     let moved = SkyLight.moveWindow(windowID: wid, to: cgFrame.origin)
                     FileLog.write("SkyLight.moveWindow: \(moved)")
                     // Also try AX resize via PID-based element
@@ -296,6 +336,8 @@ final class WindowManager {
                     if AXUIElementCopyAttributeValue(axApp, kAXFocusedWindowAttribute as CFString, &fw) == .success,
                        let axWin = fw as! AXUIElement? {
                         setSize(of: axWin, to: cgFrame.size)
+                    } else {
+                        FileLog.write("SkyLight fallback: AX resize unavailable, window size unchanged [\(appName)]")
                     }
                     return
                 }
@@ -455,6 +497,7 @@ final class WindowManager {
 
         if let windowID = getWindowID(of: window) {
             previousFrames[windowID] = currentFrame
+            trimPreviousFramesIfNeeded()
         }
         setPosition(of: window, to: CGPoint(x: cgX, y: cgY))
     }
@@ -471,6 +514,7 @@ final class WindowManager {
         if let currentFrame = getFrame(of: window),
            let windowID = getWindowID(of: window) {
             previousFrames[windowID] = currentFrame
+            trimPreviousFramesIfNeeded()
         }
         let cgFrame = convertToCG(nsFrame: targetFrame, screen: screen)
         move(window: window, to: cgFrame)
@@ -499,6 +543,11 @@ final class WindowManager {
 
     // MARK: - Coordinate Conversion
 
+    /// Convert from NS global coordinates (origin at bottom-left of main screen, Y up)
+    /// to CG global coordinates (origin at top-left of main screen, Y down).
+    /// Uses mainScreen.frame.height to flip the Y axis. This is correct for ALL screens
+    /// because both coordinate systems share the same global origin reference (the main screen).
+    /// The `screen` parameter is retained for API clarity but not needed for the conversion.
     func convertToCG(nsFrame: CGRect, screen: NSScreen) -> CGRect {
         guard let mainScreen = NSScreen.screens.first else { return nsFrame }
         let mainHeight = mainScreen.frame.height

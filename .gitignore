@@ -22,7 +22,8 @@ Pods/
 *.swp
 *~
 build/
-docs/
+docs/*
+!docs/TECHNICAL_REVIEW.md
 landing/
 node_modules/
 scripts/.env*

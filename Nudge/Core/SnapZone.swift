@@ -2,7 +2,10 @@ import Cocoa
 
 struct SnapZone {
     static func frame(for action: SnapAction, on screen: NSScreen) -> CGRect? {
-        let f = screen.visibleFrame
+        frame(for: action, in: screen.visibleFrame)
+    }
+
+    static func frame(for action: SnapAction, in f: CGRect) -> CGRect? {
         switch action {
         case .leftHalf:
             return CGRect(x: f.minX, y: f.minY, width: floor(f.width / 2), height: f.height)

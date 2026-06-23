@@ -18,18 +18,18 @@ final class SnapOverlayWindow: NSWindow {
         setFrame(frame, display: true)
         alphaValue = 0
         orderFront(nil)
-        NSAnimationContext.runAnimationGroup { context in
+        NSAnimationContext.runAnimationGroup { [weak self] context in
             context.duration = 0.15
-            self.animator().alphaValue = 1
+            self?.animator().alphaValue = 1
         }
     }
 
     func hideOverlay() {
-        NSAnimationContext.runAnimationGroup({ context in
+        NSAnimationContext.runAnimationGroup({ [weak self] context in
             context.duration = 0.1
-            self.animator().alphaValue = 0
-        }, completionHandler: {
-            self.orderOut(nil)
+            self?.animator().alphaValue = 0
+        }, completionHandler: { [weak self] in
+            self?.orderOut(nil)
         })
     }
 }
@@ -37,9 +37,9 @@ final class SnapOverlayWindow: NSWindow {
 private class OverlayView: NSView {
     override func draw(_ dirtyRect: NSRect) {
         let path = NSBezierPath(roundedRect: bounds.insetBy(dx: 4, dy: 4), xRadius: 8, yRadius: 8)
-        NSColor.systemBlue.withAlphaComponent(0.3).setFill()
+        NSColor.white.withAlphaComponent(0.3).setFill()
         path.fill()
-        NSColor.systemBlue.withAlphaComponent(0.6).setStroke()
+        NSColor.white.withAlphaComponent(0.6).setStroke()
         path.lineWidth = 2
         path.stroke()
     }

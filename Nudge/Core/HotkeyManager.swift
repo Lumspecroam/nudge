@@ -10,6 +10,7 @@ final class HotkeyManager {
     private var actionMap: [UInt32: SnapAction] = [:]
     private var nextID: UInt32 = 1
     private var isRunning = false
+    private var isPaused = false
     private var handlerInstalled = false
     private var lastEventTime: UInt64 = 0
 
@@ -23,27 +24,37 @@ final class HotkeyManager {
             handlerInstalled = true
             FileLog.write("HotkeyManager: event handler installed")
         }
-        registerAllHotkeys()
+        if !isPaused {
+            registerAllHotkeys()
+        }
         FileLog.write("HotkeyManager: \(actionMap.count) hotkeys registered, trusted=\(trusted)")
     }
 
     func stop() {
         guard isRunning else { return }
         isRunning = false
+        isPaused = false
         unregisterAllHotkeys()
     }
 
     func reloadHotkeys() {
         unregisterAllHotkeys()
-        registerAllHotkeys()
+        if isRunning && !isPaused {
+            registerAllHotkeys()
+        }
     }
 
     func pause() {
+        isPaused = true
         unregisterAllHotkeys()
     }
 
     func resume() {
-        registerAllHotkeys()
+        guard isPaused else { return }
+        isPaused = false
+        if isRunning {
+            registerAllHotkeys()
+        }
     }
 
     // MARK: - Carbon Event Handler
@@ -59,7 +70,10 @@ final class HotkeyManager {
             }
             return noErr
         }
-        InstallEventHandler(GetApplicationEventTarget(), handler, 1, &eventType, nil, nil)
+        let status = InstallEventHandler(GetApplicationEventTarget(), handler, 1, &eventType, nil, nil)
+        if status != noErr {
+            FileLog.write("HotkeyManager: InstallEventHandler failed status=\(status)")
+        }
     }
 
     private func handleHotkey(id: UInt32) {
@@ -80,7 +94,7 @@ final class HotkeyManager {
 
     private func registerAllHotkeys() {
         for action in SnapAction.allCases {
-            let hotkey = UserPreferences.shared.hotkey(for: action)
+            guard let hotkey = UserPreferences.shared.hotkey(for: action) else { continue }
             registerHotkey(action: action, modifiers: hotkey.modifiers, keyCode: hotkey.keyCode)
         }
     }
@@ -89,7 +103,7 @@ final class HotkeyManager {
         let id = nextID
         nextID += 1
         actionMap[id] = action
-        var hotkeyID = EventHotKeyID(signature: OSType(0x4E554447), id: id)
+        let hotkeyID = EventHotKeyID(signature: OSType(0x4E554447), id: id)
         var hotkeyRef: EventHotKeyRef?
         let status = RegisterEventHotKey(keyCode, modifiers, hotkeyID, GetApplicationEventTarget(), 0, &hotkeyRef)
         if status == noErr, let ref = hotkeyRef {

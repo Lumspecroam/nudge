@@ -58,6 +58,11 @@ final class PreferencesWindow: NSWindowController {
         dragSnapCheckbox.frame = NSRect(x: 20, y: 210, width: 400, height: 24)
         view.addSubview(dragSnapCheckbox)
 
+        let analyticsCheckbox = NSButton(checkboxWithTitle: "Send anonymous usage analytics", target: self, action: #selector(toggleAnalytics(_:)))
+        analyticsCheckbox.state = UserPreferences.shared.analyticsEnabled ? .on : .off
+        analyticsCheckbox.frame = NSRect(x: 20, y: 180, width: 400, height: 24)
+        view.addSubview(analyticsCheckbox)
+
         return view
     }
 
@@ -74,6 +79,10 @@ final class PreferencesWindow: NSWindowController {
     @objc private func toggleDragSnap(_ sender: NSButton) {
         UserPreferences.shared.dragSnapEnabled = sender.state == .on
         DragSnapManager.shared.reload()
+    }
+
+    @objc private func toggleAnalytics(_ sender: NSButton) {
+        UserPreferences.shared.analyticsEnabled = sender.state == .on
     }
 
     private func makeShortcutsView() -> NSView {
@@ -93,10 +102,15 @@ final class PreferencesWindow: NSWindowController {
 
             let recorder = KeyRecorderView(frame: NSRect(x: 230, y: y, width: 160, height: 24))
             recorder.identifier = NSUserInterfaceItemIdentifier("recorder-\(index)")
+            recorder.representedAction = action
             let hotkey = UserPreferences.shared.hotkey(for: action)
-            recorder.setShortcut(modifiers: hotkey.modifiers, keyCode: hotkey.keyCode)
+            recorder.setShortcut(hotkey)
             recorder.onRecorded = { modifiers, keyCode in
                 UserPreferences.shared.setCustomHotkey(for: action, modifiers: modifiers, keyCode: keyCode)
+                HotkeyManager.shared.reloadHotkeys()
+            }
+            recorder.onCleared = {
+                UserPreferences.shared.disableHotkey(for: action)
                 HotkeyManager.shared.reloadHotkeys()
             }
             contentView.addSubview(recorder)
@@ -127,7 +141,7 @@ final class PreferencesWindow: NSWindowController {
         for subview in contentView.subviews {
             if let recorder = subview as? KeyRecorderView, recorder.identifier == recorderID {
                 let hotkey = action.defaultHotkey
-                recorder.setShortcut(modifiers: hotkey.modifiers, keyCode: hotkey.keyCode)
+                recorder.setShortcut(hotkey)
                 break
             }
         }

@@ -27,7 +27,7 @@ final class DisplayHelper {
 
     func currentScreen(for windowFrame: CGRect) -> NSScreen {
         var maxArea: CGFloat = 0
-        var bestScreen = NSScreen.main!
+        var bestScreen = NSScreen.main ?? NSScreen.screens.first
         for screen in NSScreen.screens {
             let intersection = screen.frame.intersection(windowFrame)
             let area = intersection.width * intersection.height
@@ -36,7 +36,7 @@ final class DisplayHelper {
                 bestScreen = screen
             }
         }
-        return bestScreen
+        return bestScreen ?? NSScreen.screens.first!
     }
 
     private var sortedScreens: [NSScreen] {

@@ -6,6 +6,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     private var didSetup = false
 
     func setup() {
+        guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else { return }
         guard !didSetup else { return }
         didSetup = true
 
@@ -39,5 +40,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         HotkeyManager.shared.stop()
         DragSnapManager.shared.stop()
+        AccessibilityHelper.shared.stopPolling()
     }
 }

@@ -17,7 +17,7 @@ Nudge lets you snap, resize, and organize your windows with keyboard shortcuts a
 
 ## Features
 
-- **Keyboard Shortcuts** — 18 actions for halves, quarters, thirds, maximize, center, and display moves
+- **Keyboard Shortcuts** — 19 actions for halves, quarters, thirds, maximize, center, and display moves
 - **Drag-to-Snap** — Drag a window to a screen edge or corner to snap it into position
 - **Customizable** — Remap any shortcut to your preference through the Settings panel
 - **Menu Bar App** — Lives in your menu bar, always accessible, never in your way
@@ -41,6 +41,7 @@ Nudge lets you snap, resize, and organize your windows with keyboard shortcuts a
 | Center Third | ⌃⌥F |
 | Right Third | ⌃⌥G |
 | Left Two Thirds | ⌃⌥E |
+| Center Two Thirds | ⌃⌥R |
 | Right Two Thirds | ⌃⌥T |
 | Maximize | ⌃⌥↩ |
 | Center | ⌃⌥C |

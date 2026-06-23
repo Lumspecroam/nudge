@@ -2,73 +2,74 @@ import XCTest
 @testable import Nudge
 
 final class SnapZoneTests: XCTestCase {
+    private let frame = CGRect(x: -100, y: 50, width: 1001, height: 799)
+
     func testLeftHalf() {
-        guard let screen = NSScreen.main else { return }
-        let f = screen.visibleFrame
-        let result = SnapZone.frame(for: .leftHalf, on: screen)!
-        XCTAssertEqual(result.origin.x, f.minX)
-        XCTAssertEqual(result.origin.y, f.minY)
-        XCTAssertEqual(result.width, floor(f.width / 2))
-        XCTAssertEqual(result.height, f.height)
+        let result = SnapZone.frame(for: .leftHalf, in: frame)!
+        XCTAssertEqual(result.origin.x, frame.minX)
+        XCTAssertEqual(result.origin.y, frame.minY)
+        XCTAssertEqual(result.width, floor(frame.width / 2))
+        XCTAssertEqual(result.height, frame.height)
     }
+
     func testRightHalf() {
-        guard let screen = NSScreen.main else { return }
-        let f = screen.visibleFrame
-        let result = SnapZone.frame(for: .rightHalf, on: screen)!
-        let halfW = floor(f.width / 2)
-        XCTAssertEqual(result.origin.x, f.minX + halfW)
-        XCTAssertEqual(result.width, f.width - halfW)
+        let result = SnapZone.frame(for: .rightHalf, in: frame)!
+        let halfW = floor(frame.width / 2)
+        XCTAssertEqual(result.origin.x, frame.minX + halfW)
+        XCTAssertEqual(result.width, frame.width - halfW)
     }
+
     func testTopHalf() {
-        guard let screen = NSScreen.main else { return }
-        let f = screen.visibleFrame
-        let result = SnapZone.frame(for: .topHalf, on: screen)!
-        let halfH = floor(f.height / 2)
-        XCTAssertEqual(result.origin.y, f.minY + halfH)
-        XCTAssertEqual(result.height, f.height - halfH)
+        let result = SnapZone.frame(for: .topHalf, in: frame)!
+        let halfH = floor(frame.height / 2)
+        XCTAssertEqual(result.origin.y, frame.minY + halfH)
+        XCTAssertEqual(result.height, frame.height - halfH)
     }
+
     func testBottomHalf() {
-        guard let screen = NSScreen.main else { return }
-        let f = screen.visibleFrame
-        let result = SnapZone.frame(for: .bottomHalf, on: screen)!
-        XCTAssertEqual(result.origin.y, f.minY)
-        XCTAssertEqual(result.height, floor(f.height / 2))
+        let result = SnapZone.frame(for: .bottomHalf, in: frame)!
+        XCTAssertEqual(result.origin.y, frame.minY)
+        XCTAssertEqual(result.height, floor(frame.height / 2))
     }
+
     func testMaximize() {
-        guard let screen = NSScreen.main else { return }
-        let result = SnapZone.frame(for: .maximize, on: screen)!
-        XCTAssertEqual(result, screen.visibleFrame)
+        XCTAssertEqual(SnapZone.frame(for: .maximize, in: frame), frame)
     }
+
     func testQuartersCoverScreen() {
-        guard let screen = NSScreen.main else { return }
-        let f = screen.visibleFrame
-        let tl = SnapZone.frame(for: .topLeft, on: screen)!
-        let tr = SnapZone.frame(for: .topRight, on: screen)!
-        let bl = SnapZone.frame(for: .bottomLeft, on: screen)!
-        let br = SnapZone.frame(for: .bottomRight, on: screen)!
-        XCTAssertEqual(tl.width + tr.width, f.width, accuracy: 1)
-        XCTAssertEqual(bl.width + br.width, f.width, accuracy: 1)
-        XCTAssertEqual(tl.height + bl.height, f.height, accuracy: 1)
+        let tl = SnapZone.frame(for: .topLeft, in: frame)!
+        let tr = SnapZone.frame(for: .topRight, in: frame)!
+        let bl = SnapZone.frame(for: .bottomLeft, in: frame)!
+        let br = SnapZone.frame(for: .bottomRight, in: frame)!
+        XCTAssertEqual(tl.width + tr.width, frame.width, accuracy: 1)
+        XCTAssertEqual(bl.width + br.width, frame.width, accuracy: 1)
+        XCTAssertEqual(tl.height + bl.height, frame.height, accuracy: 1)
     }
+
     func testThirdsCoverScreen() {
-        guard let screen = NSScreen.main else { return }
-        let f = screen.visibleFrame
-        let l = SnapZone.frame(for: .leftThird, on: screen)!
-        let c = SnapZone.frame(for: .centerThird, on: screen)!
-        let r = SnapZone.frame(for: .rightThird, on: screen)!
-        XCTAssertEqual(l.width + c.width + r.width, f.width, accuracy: 1)
+        let l = SnapZone.frame(for: .leftThird, in: frame)!
+        let c = SnapZone.frame(for: .centerThird, in: frame)!
+        let r = SnapZone.frame(for: .rightThird, in: frame)!
+        XCTAssertEqual(l.width + c.width + r.width, frame.width, accuracy: 1)
     }
+
+    func testCenterTwoThirdsUsesSymmetricMarginsOnOddWidth() {
+        let result = SnapZone.frame(for: .centerTwoThirds, in: frame)!
+        let margin = floor(frame.width / 6)
+        XCTAssertEqual(result.minX, frame.minX + margin)
+        XCTAssertEqual(result.maxX, frame.maxX - margin)
+    }
+
     func testRestoreReturnsNil() {
-        guard let screen = NSScreen.main else { return }
-        XCTAssertNil(SnapZone.frame(for: .restore, on: screen))
+        XCTAssertNil(SnapZone.frame(for: .restore, in: frame))
     }
+
     func testCenterReturnsNil() {
-        guard let screen = NSScreen.main else { return }
-        XCTAssertNil(SnapZone.frame(for: .center, on: screen))
+        XCTAssertNil(SnapZone.frame(for: .center, in: frame))
     }
+
     func testDisplayActionsReturnNil() {
-        guard let screen = NSScreen.main else { return }
-        XCTAssertNil(SnapZone.frame(for: .nextDisplay, on: screen))
-        XCTAssertNil(SnapZone.frame(for: .previousDisplay, on: screen))
+        XCTAssertNil(SnapZone.frame(for: .nextDisplay, in: frame))
+        XCTAssertNil(SnapZone.frame(for: .previousDisplay, in: frame))
     }
 }

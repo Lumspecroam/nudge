@@ -123,12 +123,15 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     }
 
     private func addSnapItem(_ menu: NSMenu, _ action: SnapAction) {
-        let hotkey = UserPreferences.shared.hotkey(for: action)
-        let shortcutText = shortcutDescription(modifiers: hotkey.modifiers, keyCode: hotkey.keyCode)
+        let shortcutText: String
+        if let hotkey = UserPreferences.shared.hotkey(for: action) {
+            shortcutText = shortcutDescription(modifiers: hotkey.modifiers, keyCode: hotkey.keyCode)
+        } else {
+            shortcutText = "—"
+        }
 
         // Use attributed title: "Left Half" left-aligned, shortcut right
         let title = action.displayName
-        let fullTitle = "\(title)        \(shortcutText)"
 
         let item = NSMenuItem()
         item.target = self
@@ -175,17 +178,22 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     }
 
     @objc private func openAccessibilitySettings() {
-        NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!)
+        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
+            NSWorkspace.shared.open(url)
+        }
     }
 
     @objc private func openSponsor() {
-        NSWorkspace.shared.open(URL(string: "https://ko-fi.com/mikusnuz")!)
+        if let url = URL(string: "https://ko-fi.com/mikusnuz") {
+            NSWorkspace.shared.open(url)
+        }
     }
 
     @objc private func showAbout() {
         let alert = NSAlert()
         alert.messageText = "Nudge"
-        alert.informativeText = "Version 1.0.0\nA free, open-source macOS window manager.\n\nhttps://github.com/mikusnuz/nudge"
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
+        alert.informativeText = "Version \(version)\nA free, open-source macOS window manager.\n\nhttps://github.com/mikusnuz/nudge"
         alert.alertStyle = .informational
         alert.addButton(withTitle: "OK")
         NSApp.activate(ignoringOtherApps: true)

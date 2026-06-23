@@ -6,15 +6,18 @@
     </linearGradient>
   </defs>
 
-  <!-- Background -->
-  <rect x="0" y="0" width="1024" height="1024" rx="228" ry="228" fill="url(#bg)"/>
+  <!-- macOS legacy app icon keyline: 824pt artwork centered on a 1024pt canvas -->
+  <g transform="translate(100 100) scale(0.8046875)">
+    <!-- Background -->
+    <rect x="0" y="0" width="1024" height="1024" rx="228" ry="228" fill="url(#bg)"/>
 
-  <!-- Left top pane -->
-  <rect x="200" y="200" width="280" height="280" rx="32" ry="32" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
+    <!-- Left top pane -->
+    <rect x="200" y="200" width="280" height="280" rx="32" ry="32" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
 
-  <!-- Left bottom pane -->
-  <rect x="200" y="544" width="280" height="280" rx="32" ry="32" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
+    <!-- Left bottom pane -->
+    <rect x="200" y="544" width="280" height="280" rx="32" ry="32" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.4)" stroke-width="4"/>
 
-  <!-- Right half pane (active) -->
-  <rect x="544" y="200" width="280" height="624" rx="32" ry="32" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,1)" stroke-width="4"/>
+    <!-- Right half pane (active) -->
+    <rect x="544" y="200" width="280" height="624" rx="32" ry="32" fill="rgba(255,255,255,0.9)" stroke="rgba(255,255,255,1)" stroke-width="4"/>
+  </g>
 </svg>
