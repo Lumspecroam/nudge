@@ -22,6 +22,7 @@ Pods/
 *.swp
 *~
 build/
+*.dmg
 docs/*
 !docs/TECHNICAL_REVIEW.md
 landing/
