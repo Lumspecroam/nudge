@@ -20,6 +20,18 @@ settings:
     PRODUCT_BUNDLE_IDENTIFIER: app.nudge.Nudge
     ENABLE_APP_SANDBOX: false
     ENABLE_HARDENED_RUNTIME: true
+  configs:
+    Release:
+      # Strip symbols and dead code to reduce binary size
+      COPY_PHASE_STRIP: true
+      STRIP_INSTALLED_PRODUCT: true
+      STRIP_SWIFT_SYMBOLS: true
+      DEAD_CODE_STRIPPING: true
+      SWIFT_COMPILATION_MODE: wholemodule
+      SWIFT_OPTIMIZATION_LEVEL: "-O"
+      GCC_OPTIMIZATION_LEVEL: s
+      ENABLE_NS_ASSERTIONS: NO
+      VALIDATE_PRODUCT: YES
 targets:
   Nudge:
     type: application

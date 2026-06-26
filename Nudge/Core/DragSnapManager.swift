@@ -219,12 +219,14 @@ final class DragSnapManager {
 
         resetDragState()
 
+        // Always hide overlay on mouseup unless we are about to move the window
+        // (in which case move+hideOverlay happen together below)
         guard wasDragging, let action = action, let window = window else {
-            DispatchQueue.main.async { SnapOverlayWindow.shared.hideOverlay() }
+            hideOverlayAsync()
             return
         }
         guard let screen = screenForCursor(cursorPosition) else {
-            DispatchQueue.main.async { SnapOverlayWindow.shared.hideOverlay() }
+            hideOverlayAsync()
             return
         }
 
@@ -235,8 +237,13 @@ final class DragSnapManager {
                 SnapOverlayWindow.shared.hideOverlay()
             }
         } else {
-            DispatchQueue.main.async { SnapOverlayWindow.shared.hideOverlay() }
+            hideOverlayAsync()
         }
+    }
+
+    /// Convenience wrapper: hide overlay on main thread without capturing self
+    private func hideOverlayAsync() {
+        DispatchQueue.main.async { SnapOverlayWindow.shared.hideOverlay() }
     }
 
     // MARK: - Zone Detection

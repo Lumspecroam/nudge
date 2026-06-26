@@ -185,7 +185,9 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         NSApp.terminate(nil)
     }
 
-    private func makeGridImage() -> NSImage {
+    /// Fallback 2x2 grid icon when MenuBarIcon asset is missing.
+    /// Cached at first use since it never changes.
+    private static let cachedGridImage: NSImage = {
         let image = NSImage(size: NSSize(width: 18, height: 18))
         image.lockFocus()
         NSColor.controlTextColor.set()
@@ -196,5 +198,9 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         image.unlockFocus()
         image.isTemplate = true
         return image
+    }()
+
+    private func makeGridImage() -> NSImage {
+        Self.cachedGridImage
     }
 }
