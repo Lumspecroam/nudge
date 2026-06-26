@@ -196,8 +196,7 @@ final class WindowManager {
     func move(window: AXUIElement, to frame: CGRect) {
         if let currentFrame = getFrame(of: window),
            let windowID = getWindowID(of: window) {
-            previousFrames[windowID] = currentFrame
-            trimPreviousFramesIfNeeded()
+            savePreviousFrame(currentFrame, forWindowID: windowID)
         }
         disableEnhancedUI(for: window)
         setPosition(of: window, to: frame.origin)
@@ -211,6 +210,13 @@ final class WindowManager {
         for key in keysToRemove {
             previousFrames.removeValue(forKey: key)
         }
+    }
+
+    /// Save the current frame for undo support, then trim if over capacity.
+    /// Consolidates the repeated `previousFrames[id] = frame; trim()` pattern.
+    private func savePreviousFrame(_ frame: CGRect, forWindowID windowID: String) {
+        previousFrames[windowID] = frame
+        trimPreviousFramesIfNeeded()
     }
 
     /// Disable AXEnhancedUserInterface on the app — Chrome/Chromium enables this
@@ -257,8 +263,7 @@ final class WindowManager {
 
         // Save current (maximized) frame so user can undo this restore
         if let windowID = getWindowID(of: window) {
-            previousFrames[windowID] = frame
-            trimPreviousFramesIfNeeded()
+            savePreviousFrame(frame, forWindowID: windowID)
         }
 
         let cgX: CGFloat
@@ -325,9 +330,7 @@ final class WindowManager {
 
                 if let targetFrame = SnapZone.frame(for: action, on: currentScreen) {
                     let cgFrame = convertToCG(nsFrame: targetFrame, screen: currentScreen)
-                    let key = "\(pid)-\(wid)"
-                    previousFrames[key] = currentBounds
-                    trimPreviousFramesIfNeeded()
+                    savePreviousFrame(currentBounds, forWindowID: "\(pid)-\(wid)")
                     let moved = SkyLight.moveWindow(windowID: wid, to: cgFrame.origin)
                     FileLog.write("SkyLight.moveWindow: \(moved)")
                     // Also try AX resize via PID-based element
@@ -459,8 +462,7 @@ final class WindowManager {
         let cgY = screenCG.minY + (screenCG.height - size.height) / 2
 
         if let windowID = getWindowID(of: window) {
-            previousFrames[windowID] = currentFrame
-            trimPreviousFramesIfNeeded()
+            savePreviousFrame(currentFrame, forWindowID: windowID)
         }
         setPosition(of: window, to: CGPoint(x: cgX, y: cgY))
     }
@@ -476,8 +478,7 @@ final class WindowManager {
         let targetFrame = screen.visibleFrame
         if let currentFrame = getFrame(of: window),
            let windowID = getWindowID(of: window) {
-            previousFrames[windowID] = currentFrame
-            trimPreviousFramesIfNeeded()
+            savePreviousFrame(currentFrame, forWindowID: windowID)
         }
         let cgFrame = convertToCG(nsFrame: targetFrame, screen: screen)
         move(window: window, to: cgFrame)

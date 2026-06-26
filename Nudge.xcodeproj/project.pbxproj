@@ -22,6 +22,7 @@
 		5510B0B39D0CEB5E997CCBC3 /* SnapActionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FEE976A494EF28079ED9FF /* SnapActionTests.swift */; };
 		56DEA6B16BDC5A32A6F0E205 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B259F3E95ED6E9E651CAF78D /* PerformanceTests.swift */; };
 		58089AA7F64F65F7398BB1BA /* PreferencesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD4EA8C359F6394C3B78DBD /* PreferencesWindow.swift */; };
+		584695918565B11BF32BA1EC /* HotkeyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588DD8B66B473682B3F8FD4B /* HotkeyFormatter.swift */; };
 		65A59ED455AA9AEB9683A2F1 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BC0DF7C25F6B121DB9C7F2 /* StatusBarController.swift */; };
 		6A9A1FAE2A79756E2E954DB5 /* WindowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE29C012FD7CBDF9229AEE6 /* WindowManager.swift */; };
 		6EC4BEEA1A4A3E5003360DEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBB036BAB62057DE45BBEC7F /* Assets.xcassets */; };
@@ -30,7 +31,9 @@
 		7915EAD7FE1CA225500541F4 /* FileLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B315791F0D60A8A9EACBF5AD /* FileLog.swift */; };
 		7A376DE43562EEBAD07755BC /* AccessibilityHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8737084F2E2A1667E9F1489 /* AccessibilityHelper.swift */; };
 		7B542C6EB6278E0047D6439E /* SnapOverlayWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C37AB5A2D0E748A35AC93CE /* SnapOverlayWindow.swift */; };
+		7F7D4839C51C1AE594E49BC5 /* HotkeyFormatterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC62875CFE36484ADE00809 /* HotkeyFormatterTests.swift */; };
 		80737C38EAAA54BAF48C2A83 /* SnapZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ABE84E0BA0C6951989EE5D /* SnapZone.swift */; };
+		83918046ED79BBC86F3764E1 /* HotkeyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588DD8B66B473682B3F8FD4B /* HotkeyFormatter.swift */; };
 		853D00A7D0B3B79BB4A19921 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D56577D6C19F75C04089C /* Analytics.swift */; };
 		8A4075B97375B65CDCBEC997 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94958E79F696A47AFE35453 /* HotkeyManager.swift */; };
 		904FCED0325EC9C91E8CDCB8 /* SnapAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDCAA75D7385ECAD476425C /* SnapAction.swift */; };
@@ -65,10 +68,12 @@
 		3ED4F73875F9529901D0E2E0 /* SnapIconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapIconGenerator.swift; sourceTree = "<group>"; };
 		41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyLightBridge.swift; sourceTree = "<group>"; };
 		50361DA1FBA39934BD3333ED /* Nudge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nudge.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		588DD8B66B473682B3F8FD4B /* HotkeyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyFormatter.swift; sourceTree = "<group>"; };
 		7405730654BA450CB29B76DC /* Nudge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nudge.entitlements; sourceTree = "<group>"; };
 		772B9A7B1550F3358D8A5B2D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7B6D5547BAC8324EC7CE56B8 /* DragSnapZoneDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragSnapZoneDetectionTests.swift; sourceTree = "<group>"; };
 		7C37AB5A2D0E748A35AC93CE /* SnapOverlayWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapOverlayWindow.swift; sourceTree = "<group>"; };
+		7CC62875CFE36484ADE00809 /* HotkeyFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyFormatterTests.swift; sourceTree = "<group>"; };
 		7E09B912C129D2FE33B3779F /* UserPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesTests.swift; sourceTree = "<group>"; };
 		811D56577D6C19F75C04089C /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		9B2EE831E6AC17D70395D458 /* KeyRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRecorderView.swift; sourceTree = "<group>"; };
@@ -98,6 +103,7 @@
 			children = (
 				B6E89CF0C12E3E02A7B684AA /* DragGestureClassifierTests.swift */,
 				7B6D5547BAC8324EC7CE56B8 /* DragSnapZoneDetectionTests.swift */,
+				7CC62875CFE36484ADE00809 /* HotkeyFormatterTests.swift */,
 				D939DF5A81E4DDBA106FDC69 /* KeyRecorderViewTests.swift */,
 				B259F3E95ED6E9E651CAF78D /* PerformanceTests.swift */,
 				31FEE976A494EF28079ED9FF /* SnapActionTests.swift */,
@@ -135,6 +141,7 @@
 				811D56577D6C19F75C04089C /* Analytics.swift */,
 				3DBDE59251F0C7A9B8CD98F7 /* DisplayHelper.swift */,
 				B315791F0D60A8A9EACBF5AD /* FileLog.swift */,
+				588DD8B66B473682B3F8FD4B /* HotkeyFormatter.swift */,
 				41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */,
 			);
 			path = Helpers;
@@ -299,6 +306,7 @@
 				AF7E495CC449C994537F5588 /* DisplayHelper.swift in Sources */,
 				71EC31D05E3F050EDC6214D5 /* DragSnapManager.swift in Sources */,
 				2B886279A89C7DD6B7FFA646 /* FileLog.swift in Sources */,
+				584695918565B11BF32BA1EC /* HotkeyFormatter.swift in Sources */,
 				E7D19AECD271724EBF00359E /* HotkeyManager.swift in Sources */,
 				968B729F6A1F6B499476E4D8 /* KeyRecorderView.swift in Sources */,
 				F6368D66B74679CC63ADEE3C /* PreferencesWindow.swift in Sources */,
@@ -325,6 +333,8 @@
 				1C818D52F2C8F98E643CFA29 /* DragSnapManager.swift in Sources */,
 				31E503DAC866BD062AE7B86B /* DragSnapZoneDetectionTests.swift in Sources */,
 				7915EAD7FE1CA225500541F4 /* FileLog.swift in Sources */,
+				83918046ED79BBC86F3764E1 /* HotkeyFormatter.swift in Sources */,
+				7F7D4839C51C1AE594E49BC5 /* HotkeyFormatterTests.swift in Sources */,
 				8A4075B97375B65CDCBEC997 /* HotkeyManager.swift in Sources */,
 				3C2A3B3E95A322CF613446DD /* KeyRecorderView.swift in Sources */,
 				CE95B9FB7C25A90417FDF1DB /* KeyRecorderViewTests.swift in Sources */,

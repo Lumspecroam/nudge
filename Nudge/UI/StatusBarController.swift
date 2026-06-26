@@ -106,7 +106,7 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     private func addSnapItem(_ menu: NSMenu, _ action: SnapAction) {
         let shortcutText: String
         if let hotkey = UserPreferences.shared.hotkey(for: action) {
-            shortcutText = shortcutDescription(modifiers: hotkey.modifiers, keyCode: hotkey.keyCode)
+            shortcutText = HotkeyFormatter.string(modifiers: hotkey.modifiers, keyCode: hotkey.keyCode)
         } else {
             shortcutText = "—"
         }
@@ -183,41 +183,6 @@ final class StatusBarController: NSObject, NSMenuDelegate {
 
     @objc private func quit() {
         NSApp.terminate(nil)
-    }
-
-    // MARK: - Helpers
-
-    private func shortcutDescription(modifiers: UInt32, keyCode: UInt32) -> String {
-        var parts: [String] = []
-        if modifiers & UInt32(controlKey) != 0 { parts.append("⌃") }
-        if modifiers & UInt32(optionKey) != 0 { parts.append("⌥") }
-        if modifiers & UInt32(cmdKey) != 0 { parts.append("⌘") }
-        if modifiers & UInt32(shiftKey) != 0 { parts.append("⇧") }
-        parts.append(keyCodeToString(keyCode))
-        return parts.joined(separator: " ")
-    }
-
-    private func keyCodeToString(_ keyCode: UInt32) -> String {
-        switch Int(keyCode) {
-        case kVK_LeftArrow: return "←"
-        case kVK_RightArrow: return "→"
-        case kVK_UpArrow: return "↑"
-        case kVK_DownArrow: return "↓"
-        case kVK_Return: return "Return"
-        case kVK_Delete: return "Backspace"
-        case kVK_ANSI_U: return "U"
-        case kVK_ANSI_I: return "I"
-        case kVK_ANSI_J: return "J"
-        case kVK_ANSI_K: return "K"
-        case kVK_ANSI_D: return "D"
-        case kVK_ANSI_F: return "F"
-        case kVK_ANSI_G: return "G"
-        case kVK_ANSI_E: return "E"
-        case kVK_ANSI_R: return "R"
-        case kVK_ANSI_T: return "T"
-        case kVK_ANSI_C: return "C"
-        default: return "?"
-        }
     }
 
     private func makeGridImage() -> NSImage {
