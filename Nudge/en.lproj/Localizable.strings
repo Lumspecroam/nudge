@@ -1,0 +1,60 @@
+/* SnapAction display names */
+"Left Half" = "Left Half";
+"Right Half" = "Right Half";
+"Top Half" = "Top Half";
+"Bottom Half" = "Bottom Half";
+"Top Left" = "Top Left";
+"Top Right" = "Top Right";
+"Bottom Left" = "Bottom Left";
+"Bottom Right" = "Bottom Right";
+"Left Third" = "Left Third";
+"Center Third" = "Center Third";
+"Right Third" = "Right Third";
+"Left Two Thirds" = "Left Two Thirds";
+"Center Two Thirds" = "Center Two Thirds";
+"Right Two Thirds" = "Right Two Thirds";
+"Maximize" = "Maximize";
+"Center" = "Center";
+"Restore" = "Restore";
+"Next Display" = "Next Display";
+"Previous Display" = "Previous Display";
+
+/* SnapAction categories */
+"Halves" = "Halves";
+"Quarters" = "Quarters";
+"Thirds" = "Thirds";
+"Two Thirds" = "Two Thirds";
+"Other" = "Other";
+"Display" = "Display";
+
+/* Status bar menu */
+"⚠ Grant Accessibility Permission" = "⚠ Grant Accessibility Permission";
+"Settings..." = "Settings...";
+"Support Nudge ♥" = "Support Nudge ♥";
+"About Nudge" = "About Nudge";
+"Quit" = "Quit";
+"OK" = "OK";
+
+/* About dialog */
+"About Text" = "Version %@\nA free, open-source macOS window manager.\n\nhttps://github.com/mikusnuz/nudge";
+
+/* Ignore app menu item */
+"Ignore \"%@\"" = "Ignore \"%@\"";
+"Stop Ignoring \"%@\"" = "Stop Ignoring \"%@\"";
+"App" = "App";
+
+/* Preferences window */
+"Nudge Preferences" = "Nudge Preferences";
+"Close" = "Close";
+"File" = "File";
+"General" = "General";
+"Shortcuts" = "Shortcuts";
+"Launch Nudge at login" = "Launch Nudge at login";
+"Enable drag-snap (drag windows to screen edges)" = "Enable drag-snap (drag windows to screen edges)";
+"Send anonymous usage analytics" = "Send anonymous usage analytics";
+"Reset" = "Reset";
+
+/* KeyRecorderView */
+"Type shortcut..." = "Type shortcut...";
+"Shortcut Conflict" = "Shortcut Conflict";
+"This shortcut is already used by \"%@\"." = "This shortcut is already used by \"%@\".";

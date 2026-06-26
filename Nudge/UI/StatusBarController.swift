@@ -32,7 +32,7 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         guard let app = notification.userInfo?[NSWorkspace.applicationUserInfoKey] as? NSRunningApplication,
               let bundleID = app.bundleIdentifier,
               bundleID != "app.nudge.Nudge" else { return }
-        lastFrontAppName = app.localizedName ?? "App"
+        lastFrontAppName = app.localizedName ?? NSLocalizedString("App", comment: "")
         lastFrontAppBundleID = bundleID
     }
 
@@ -81,14 +81,14 @@ final class StatusBarController: NSObject, NSMenuDelegate {
 
         // Accessibility permission
         if !AccessibilityHelper.shared.isAccessibilityGranted {
-            let permItem = NSMenuItem(title: "⚠ Grant Accessibility Permission", action: #selector(openAccessibilitySettings), keyEquivalent: "")
+            let permItem = NSMenuItem(title: NSLocalizedString("⚠ Grant Accessibility Permission", comment: ""), action: #selector(openAccessibilitySettings), keyEquivalent: "")
             permItem.target = self
             menu.addItem(permItem)
             menu.addItem(.separator())
         }
 
         // Settings
-        let settingsItem = NSMenuItem(title: "Settings...", action: #selector(openPreferences), keyEquivalent: ",")
+        let settingsItem = NSMenuItem(title: NSLocalizedString("Settings...", comment: ""), action: #selector(openPreferences), keyEquivalent: ",")
         settingsItem.target = self
         menu.addItem(settingsItem)
         menu.addItem(.separator())
@@ -98,7 +98,7 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         let bundleID = lastFrontAppBundleID
         if !bundleID.isEmpty {
             let isIgnored = UserPreferences.shared.isAppIgnored(bundleID)
-            let ignoreTitle = isIgnored ? "Stop Ignoring \"\(appName)\"" : "Ignore \"\(appName)\""
+            let ignoreTitle = isIgnored ? String(format: NSLocalizedString("Stop Ignoring \"%@\"", comment: ""), appName) : String(format: NSLocalizedString("Ignore \"%@\"", comment: ""), appName)
             let ignoreItem = NSMenuItem(title: ignoreTitle, action: #selector(toggleIgnoreApp(_:)), keyEquivalent: "")
             ignoreItem.target = self
             ignoreItem.representedObject = bundleID
@@ -107,17 +107,17 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         }
 
         // Sponsor
-        let sponsorItem = NSMenuItem(title: "Support Nudge ♥", action: #selector(openSponsor), keyEquivalent: "")
+        let sponsorItem = NSMenuItem(title: NSLocalizedString("Support Nudge ♥", comment: ""), action: #selector(openSponsor), keyEquivalent: "")
         sponsorItem.target = self
         menu.addItem(sponsorItem)
 
         // About / Quit
-        let aboutItem = NSMenuItem(title: "About Nudge", action: #selector(showAbout), keyEquivalent: "")
+        let aboutItem = NSMenuItem(title: NSLocalizedString("About Nudge", comment: ""), action: #selector(showAbout), keyEquivalent: "")
         aboutItem.target = self
         menu.addItem(aboutItem)
         menu.addItem(.separator())
 
-        let quitItem = NSMenuItem(title: "Quit", action: #selector(quit), keyEquivalent: "q")
+        let quitItem = NSMenuItem(title: NSLocalizedString("Quit", comment: ""), action: #selector(quit), keyEquivalent: "q")
         quitItem.target = self
         menu.addItem(quitItem)
     }
@@ -193,9 +193,9 @@ final class StatusBarController: NSObject, NSMenuDelegate {
         let alert = NSAlert()
         alert.messageText = "Nudge"
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
-        alert.informativeText = "Version \(version)\nA free, open-source macOS window manager.\n\nhttps://github.com/mikusnuz/nudge"
+        alert.informativeText = String(format: NSLocalizedString("About Text", comment: ""), version)
         alert.alertStyle = .informational
-        alert.addButton(withTitle: "OK")
+        alert.addButton(withTitle: NSLocalizedString("OK", comment: ""))
         NSApp.activate(ignoringOtherApps: true)
         alert.runModal()
     }

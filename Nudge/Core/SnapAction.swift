@@ -11,25 +11,25 @@ enum SnapAction: String, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .leftHalf: return "Left Half"
-        case .rightHalf: return "Right Half"
-        case .topHalf: return "Top Half"
-        case .bottomHalf: return "Bottom Half"
-        case .topLeft: return "Top Left"
-        case .topRight: return "Top Right"
-        case .bottomLeft: return "Bottom Left"
-        case .bottomRight: return "Bottom Right"
-        case .leftThird: return "Left Third"
-        case .centerThird: return "Center Third"
-        case .rightThird: return "Right Third"
-        case .leftTwoThirds: return "Left Two Thirds"
-        case .centerTwoThirds: return "Center Two Thirds"
-        case .rightTwoThirds: return "Right Two Thirds"
-        case .maximize: return "Maximize"
-        case .center: return "Center"
-        case .restore: return "Restore"
-        case .nextDisplay: return "Next Display"
-        case .previousDisplay: return "Previous Display"
+        case .leftHalf: return NSLocalizedString("Left Half", comment: "")
+        case .rightHalf: return NSLocalizedString("Right Half", comment: "")
+        case .topHalf: return NSLocalizedString("Top Half", comment: "")
+        case .bottomHalf: return NSLocalizedString("Bottom Half", comment: "")
+        case .topLeft: return NSLocalizedString("Top Left", comment: "")
+        case .topRight: return NSLocalizedString("Top Right", comment: "")
+        case .bottomLeft: return NSLocalizedString("Bottom Left", comment: "")
+        case .bottomRight: return NSLocalizedString("Bottom Right", comment: "")
+        case .leftThird: return NSLocalizedString("Left Third", comment: "")
+        case .centerThird: return NSLocalizedString("Center Third", comment: "")
+        case .rightThird: return NSLocalizedString("Right Third", comment: "")
+        case .leftTwoThirds: return NSLocalizedString("Left Two Thirds", comment: "")
+        case .centerTwoThirds: return NSLocalizedString("Center Two Thirds", comment: "")
+        case .rightTwoThirds: return NSLocalizedString("Right Two Thirds", comment: "")
+        case .maximize: return NSLocalizedString("Maximize", comment: "")
+        case .center: return NSLocalizedString("Center", comment: "")
+        case .restore: return NSLocalizedString("Restore", comment: "")
+        case .nextDisplay: return NSLocalizedString("Next Display", comment: "")
+        case .previousDisplay: return NSLocalizedString("Previous Display", comment: "")
         }
     }
 
@@ -73,12 +73,12 @@ enum SnapAction: String, CaseIterable {
 
     var category: String {
         switch self {
-        case .leftHalf, .rightHalf, .topHalf, .bottomHalf: return "Halves"
-        case .topLeft, .topRight, .bottomLeft, .bottomRight: return "Quarters"
-        case .leftThird, .centerThird, .rightThird: return "Thirds"
-        case .leftTwoThirds, .centerTwoThirds, .rightTwoThirds: return "Two Thirds"
-        case .maximize, .center, .restore: return "Other"
-        case .nextDisplay, .previousDisplay: return "Display"
+        case .leftHalf, .rightHalf, .topHalf, .bottomHalf: return NSLocalizedString("Halves", comment: "")
+        case .topLeft, .topRight, .bottomLeft, .bottomRight: return NSLocalizedString("Quarters", comment: "")
+        case .leftThird, .centerThird, .rightThird: return NSLocalizedString("Thirds", comment: "")
+        case .leftTwoThirds, .centerTwoThirds, .rightTwoThirds: return NSLocalizedString("Two Thirds", comment: "")
+        case .maximize, .center, .restore: return NSLocalizedString("Other", comment: "")
+        case .nextDisplay, .previousDisplay: return NSLocalizedString("Display", comment: "")
         }
     }
 }

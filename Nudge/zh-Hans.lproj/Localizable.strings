@@ -1,0 +1,60 @@
+/* SnapAction display names */
+"Left Half" = "左半边";
+"Right Half" = "右半边";
+"Top Half" = "上半边";
+"Bottom Half" = "下半边";
+"Top Left" = "左上角";
+"Top Right" = "右上角";
+"Bottom Left" = "左下角";
+"Bottom Right" = "右下角";
+"Left Third" = "左侧三分之一";
+"Center Third" = "中间三分之一";
+"Right Third" = "右侧三分之一";
+"Left Two Thirds" = "左侧三分之二";
+"Center Two Thirds" = "中间三分之二";
+"Right Two Thirds" = "右侧三分之二";
+"Maximize" = "最大化";
+"Center" = "居中";
+"Restore" = "还原";
+"Next Display" = "下一显示器";
+"Previous Display" = "上一显示器";
+
+/* SnapAction categories */
+"Halves" = "半屏";
+"Quarters" = "四分屏";
+"Thirds" = "三分屏";
+"Two Thirds" = "三分之二";
+"Other" = "其他";
+"Display" = "显示器";
+
+/* Status bar menu */
+"⚠ Grant Accessibility Permission" = "⚠ 授予辅助功能权限";
+"Settings..." = "设置...";
+"Support Nudge ♥" = "支持 Nudge ♥";
+"About Nudge" = "关于 Nudge";
+"Quit" = "退出";
+"OK" = "好";
+
+/* About dialog */
+"About Text" = "版本 %@\n免费开源的 macOS 窗口管理器\n\nhttps://github.com/mikusnuz/nudge";
+
+/* Ignore app menu item */
+"Ignore \"%@\"" = "忽略\"%@\"";
+"Stop Ignoring \"%@\"" = "取消忽略\"%@\"";
+"App" = "应用";
+
+/* Preferences window */
+"Nudge Preferences" = "Nudge 偏好设置";
+"Close" = "关闭";
+"File" = "文件";
+"General" = "通用";
+"Shortcuts" = "快捷键";
+"Launch Nudge at login" = "登录时启动 Nudge";
+"Enable drag-snap (drag windows to screen edges)" = "启用拖拽吸边（将窗口拖至屏幕边缘）";
+"Send anonymous usage analytics" = "发送匿名使用统计";
+"Reset" = "重置";
+
+/* KeyRecorderView */
+"Type shortcut..." = "请按下快捷键...";
+"Shortcut Conflict" = "快捷键冲突";
+"This shortcut is already used by \"%@\"." = "此快捷键已被\"%@\"使用。";

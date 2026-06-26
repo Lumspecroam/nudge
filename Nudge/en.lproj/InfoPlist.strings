@@ -1,0 +1,2 @@
+/* InfoPlist.strings - English */
+"NSAccessibilityUsageDescription" = "Nudge needs accessibility access to move and resize windows.";

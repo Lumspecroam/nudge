@@ -75,8 +75,8 @@ final class KeyRecorderView: NSView {
 
         if let action = UserPreferences.shared.conflictingAction(for: hotkey, excluding: representedAction) {
             let alert = NSAlert()
-            alert.messageText = "Shortcut Conflict"
-            alert.informativeText = "This shortcut is already used by \"\(action.displayName)\"."
+            alert.messageText = NSLocalizedString("Shortcut Conflict", comment: "")
+            alert.informativeText = String(format: NSLocalizedString("This shortcut is already used by \"%@\".", comment: ""), action.displayName)
             alert.alertStyle = .warning
             alert.runModal()
             cancelRecording()
@@ -96,7 +96,7 @@ final class KeyRecorderView: NSView {
         guard !isRecording else { return }
         isRecording = true
         HotkeyManager.shared.pause()
-        displayLabel.stringValue = "Type shortcut..."
+        displayLabel.stringValue = NSLocalizedString("Type shortcut...", comment: "")
         displayLabel.font = .systemFont(ofSize: 12)
         clearButton.isHidden = true
         layer?.borderColor = NSColor.white.cgColor

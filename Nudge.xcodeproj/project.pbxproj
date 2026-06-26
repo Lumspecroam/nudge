@@ -12,6 +12,7 @@
 		11F8110FD3282CEA7D95CE0D /* SkyLightBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */; };
 		1C818D52F2C8F98E643CFA29 /* DragSnapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88D8B5EAD1EEF756D628ADF /* DragSnapManager.swift */; };
 		263EDE01D9C3A0EF0F4BB1AB /* UserPreferencesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E09B912C129D2FE33B3779F /* UserPreferencesTests.swift */; };
+		26459A9DC656376C535B4780 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40A3A6BFAE40F2F4025AA8DF /* InfoPlist.strings */; };
 		2B886279A89C7DD6B7FFA646 /* FileLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B315791F0D60A8A9EACBF5AD /* FileLog.swift */; };
 		31E503DAC866BD062AE7B86B /* DragSnapZoneDetectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6D5547BAC8324EC7CE56B8 /* DragSnapZoneDetectionTests.swift */; };
 		3C2A3B3E95A322CF613446DD /* KeyRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE831E6AC17D70395D458 /* KeyRecorderView.swift */; };
@@ -32,6 +33,7 @@
 		8A4075B97375B65CDCBEC997 /* HotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94958E79F696A47AFE35453 /* HotkeyManager.swift */; };
 		904FCED0325EC9C91E8CDCB8 /* SnapAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DDCAA75D7385ECAD476425C /* SnapAction.swift */; };
 		909BCD93AFD46C773D5E71DB /* SnapZoneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D4E4EF90EFC59610EE29C /* SnapZoneTests.swift */; };
+		956EA96EF9FB45C393A2660A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0BE95A5F8DD5E88697E7619 /* Localizable.strings */; };
 		95D933E09487CFF3879AB788 /* SnapZone.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8ABE84E0BA0C6951989EE5D /* SnapZone.swift */; };
 		968B729F6A1F6B499476E4D8 /* KeyRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2EE831E6AC17D70395D458 /* KeyRecorderView.swift */; };
 		A6D1403F513BB664E3C1253D /* SkyLightBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */; };
@@ -56,22 +58,26 @@
 		1DDCAA75D7385ECAD476425C /* SnapAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapAction.swift; sourceTree = "<group>"; };
 		2BE29C012FD7CBDF9229AEE6 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowManager.swift; sourceTree = "<group>"; };
 		31FEE976A494EF28079ED9FF /* SnapActionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapActionTests.swift; sourceTree = "<group>"; };
+		374DA109A49CE4FB4ADADEEA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DBDE59251F0C7A9B8CD98F7 /* DisplayHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayHelper.swift; sourceTree = "<group>"; };
 		3ED4F73875F9529901D0E2E0 /* SnapIconGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapIconGenerator.swift; sourceTree = "<group>"; };
 		41759B043ACC1928C5D3E922 /* SkyLightBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkyLightBridge.swift; sourceTree = "<group>"; };
 		50361DA1FBA39934BD3333ED /* Nudge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nudge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7405730654BA450CB29B76DC /* Nudge.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nudge.entitlements; sourceTree = "<group>"; };
+		772B9A7B1550F3358D8A5B2D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		7B6D5547BAC8324EC7CE56B8 /* DragSnapZoneDetectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragSnapZoneDetectionTests.swift; sourceTree = "<group>"; };
 		7C37AB5A2D0E748A35AC93CE /* SnapOverlayWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapOverlayWindow.swift; sourceTree = "<group>"; };
 		7E09B912C129D2FE33B3779F /* UserPreferencesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesTests.swift; sourceTree = "<group>"; };
 		811D56577D6C19F75C04089C /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		9B2EE831E6AC17D70395D458 /* KeyRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRecorderView.swift; sourceTree = "<group>"; };
 		9FF5452511B5430A6199287E /* UserPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
+		AAF025DFB133B8EB94B4C258 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B315791F0D60A8A9EACBF5AD /* FileLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileLog.swift; sourceTree = "<group>"; };
 		B4BC0DF7C25F6B121DB9C7F2 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
 		B6E89CF0C12E3E02A7B684AA /* DragGestureClassifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragGestureClassifierTests.swift; sourceTree = "<group>"; };
 		B8737084F2E2A1667E9F1489 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
 		C8ABE84E0BA0C6951989EE5D /* SnapZone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapZone.swift; sourceTree = "<group>"; };
+		D3BC0EA3D009CD3A72907EF6 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		D939DF5A81E4DDBA106FDC69 /* KeyRecorderViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRecorderViewTests.swift; sourceTree = "<group>"; };
 		D94958E79F696A47AFE35453 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
 		DBB036BAB62057DE45BBEC7F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,6 +174,8 @@
 				4078A7692B569383D7993033 /* App */,
 				9103B9516CB3EE19A31A02D5 /* Core */,
 				5A05DA238825B60CCF790556 /* Helpers */,
+				40A3A6BFAE40F2F4025AA8DF /* InfoPlist.strings */,
+				A0BE95A5F8DD5E88697E7619 /* Localizable.strings */,
 				A8564AB50A7597CFC6034F0D /* Models */,
 				8D2ECE0B9702BB2B5AD19A25 /* UI */,
 			);
@@ -246,6 +254,7 @@
 			knownRegions = (
 				Base,
 				en,
+				"zh-Hans",
 			);
 			mainGroup = 7986CC1FE44B0CA21C484581;
 			minimizedProjectReferenceProxies = 1;
@@ -266,6 +275,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC4BEEA1A4A3E5003360DEC /* Assets.xcassets in Resources */,
+				26459A9DC656376C535B4780 /* InfoPlist.strings in Resources */,
+				956EA96EF9FB45C393A2660A /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +338,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		40A3A6BFAE40F2F4025AA8DF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				374DA109A49CE4FB4ADADEEA /* en */,
+				D3BC0EA3D009CD3A72907EF6 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A0BE95A5F8DD5E88697E7619 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAF025DFB133B8EB94B4C258 /* en */,
+				772B9A7B1550F3358D8A5B2D /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		19C4E00F58A40EC76042F1B4 /* Release */ = {

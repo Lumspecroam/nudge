@@ -10,17 +10,17 @@ final class PreferencesWindow: NSWindowController {
             styleMask: [.titled, .closable],
             backing: .buffered, defer: false
         )
-        window.title = "Nudge Preferences"
+        window.title = NSLocalizedString("Nudge Preferences", comment: "")
         window.center()
         window.isReleasedWhenClosed = false
         self.init(window: window)
         setupTabs()
 
         // Enable ⌘W to close
-        let closeItem = NSMenuItem(title: "Close", action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w")
-        let fileMenu = NSMenu(title: "File")
+        let closeItem = NSMenuItem(title: NSLocalizedString("Close", comment: ""), action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w")
+        let fileMenu = NSMenu(title: NSLocalizedString("File", comment: ""))
         fileMenu.addItem(closeItem)
-        let fileMenuItem = NSMenuItem(title: "File", action: nil, keyEquivalent: "")
+        let fileMenuItem = NSMenuItem(title: NSLocalizedString("File", comment: ""), action: nil, keyEquivalent: "")
         fileMenuItem.submenu = fileMenu
         if NSApp.mainMenu == nil {
             NSApp.mainMenu = NSMenu()
@@ -33,12 +33,12 @@ final class PreferencesWindow: NSWindowController {
         tabView.autoresizingMask = [.width, .height]
 
         let generalTab = NSTabViewItem(identifier: "general")
-        generalTab.label = "General"
+        generalTab.label = NSLocalizedString("General", comment: "")
         generalTab.view = makeGeneralView()
         tabView.addTabViewItem(generalTab)
 
         let shortcutsTab = NSTabViewItem(identifier: "shortcuts")
-        shortcutsTab.label = "Shortcuts"
+        shortcutsTab.label = NSLocalizedString("Shortcuts", comment: "")
         shortcutsTab.view = makeShortcutsView()
         tabView.addTabViewItem(shortcutsTab)
 
@@ -48,17 +48,17 @@ final class PreferencesWindow: NSWindowController {
     private func makeGeneralView() -> NSView {
         let view = NSView(frame: NSRect(x: 0, y: 0, width: 480, height: 300))
 
-        let launchCheckbox = NSButton(checkboxWithTitle: "Launch Nudge at login", target: self, action: #selector(toggleLaunchAtLogin(_:)))
+        let launchCheckbox = NSButton(checkboxWithTitle: NSLocalizedString("Launch Nudge at login", comment: ""), target: self, action: #selector(toggleLaunchAtLogin(_:)))
         launchCheckbox.state = UserPreferences.shared.launchAtLogin ? .on : .off
         launchCheckbox.frame = NSRect(x: 20, y: 240, width: 300, height: 24)
         view.addSubview(launchCheckbox)
 
-        let dragSnapCheckbox = NSButton(checkboxWithTitle: "Enable drag-snap (drag windows to screen edges)", target: self, action: #selector(toggleDragSnap(_:)))
+        let dragSnapCheckbox = NSButton(checkboxWithTitle: NSLocalizedString("Enable drag-snap (drag windows to screen edges)", comment: ""), target: self, action: #selector(toggleDragSnap(_:)))
         dragSnapCheckbox.state = UserPreferences.shared.dragSnapEnabled ? .on : .off
         dragSnapCheckbox.frame = NSRect(x: 20, y: 210, width: 400, height: 24)
         view.addSubview(dragSnapCheckbox)
 
-        let analyticsCheckbox = NSButton(checkboxWithTitle: "Send anonymous usage analytics", target: self, action: #selector(toggleAnalytics(_:)))
+        let analyticsCheckbox = NSButton(checkboxWithTitle: NSLocalizedString("Send anonymous usage analytics", comment: ""), target: self, action: #selector(toggleAnalytics(_:)))
         analyticsCheckbox.state = UserPreferences.shared.analyticsEnabled ? .on : .off
         analyticsCheckbox.frame = NSRect(x: 20, y: 180, width: 400, height: 24)
         view.addSubview(analyticsCheckbox)
@@ -115,7 +115,7 @@ final class PreferencesWindow: NSWindowController {
             }
             contentView.addSubview(recorder)
 
-            let resetBtn = NSButton(title: "Reset", target: nil, action: nil)
+            let resetBtn = NSButton(title: NSLocalizedString("Reset", comment: ""), target: nil, action: nil)
             resetBtn.bezelStyle = .inline
             resetBtn.frame = NSRect(x: 400, y: y, width: 50, height: 24)
             resetBtn.tag = index
