@@ -30,3 +30,7 @@ node_modules/
 scripts/.env*
 *.env
 .env.*
+
+# LLVM coverage runtime data
+*.profraw
+*.profdata
