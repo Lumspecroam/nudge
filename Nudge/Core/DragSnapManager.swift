@@ -131,65 +131,83 @@ final class DragSnapManager {
     private func handleDrag(cursorPosition: CGPoint) {
         switch dragGesture.phase {
         case .idle:
-            guard let window = WindowManager.shared.getFocusedWindow(),
-                  let windowFrame = WindowManager.shared.getFrame(of: window) else { return }
-            draggedWindow = window
-            didRestoreFromSnap = false
-            dragGesture.begin(
-                cursor: cursorPosition,
-                windowFrame: windowFrame,
-                titleBarHeight: titleBarHeight
-            )
+            beginDragIfPossible(at: cursorPosition)
             return
         case .pending:
-            guard let window = draggedWindow,
-                  let currentWindowPosition = WindowManager.shared.getPosition(of: window) else {
-                dragGesture.ignore()
-                return
-            }
-            guard dragGesture.update(
-                cursor: cursorPosition,
-                windowPosition: currentWindowPosition
-            ) else { return }
+            guard updatePendingDrag(at: cursorPosition) else { return }
         case .active:
             break
         case .ignored:
             return
         }
 
-        let cursorDelta = dragGesture.cursorDistance(to: cursorPosition)
-
-        // Restore from snap after an active title-bar drag moves 50px+
-        if !didRestoreFromSnap && cursorDelta > 50 {
+        // Active drag: handle restore-from-snap and overlay updates
+        if !didRestoreFromSnap && dragGesture.cursorDistance(to: cursorPosition) > 50 {
             didRestoreFromSnap = true
-            guard let window = draggedWindow else { return }
-            let cursor = cursorPosition
-            if WindowManager.shared.hasPreviousFrame(for: window) {
-                DispatchQueue.main.async {
-                    WindowManager.shared.restoreWindowAtCursor(window, cursorCG: cursor)
-                }
-                return
-            } else if WindowManager.shared.isWindowMaximized(window) {
-                DispatchQueue.main.async {
-                    WindowManager.shared.restoreFromMaximized(window, cursorCG: cursor)
-                }
-                return
-            }
+            if restoreDraggedWindowIfSnapped(at: cursorPosition) { return }
         }
 
-        let detectedAction = detectSnapZone(cursor: cursorPosition)
+        updateOverlayForCursor(cursorPosition)
+    }
 
-        if detectedAction != currentSnapAction {
-            currentSnapAction = detectedAction
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                if let action = detectedAction, let screen = self.screenForCursor(cursorPosition) {
-                    if let frame = SnapZone.frame(for: action, on: screen) {
-                        SnapOverlayWindow.shared.show(at: frame)
-                    }
-                } else {
-                    SnapOverlayWindow.shared.hideOverlay()
+    /// Start a new drag if there's a focused window
+    private func beginDragIfPossible(at cursor: CGPoint) {
+        guard let window = WindowManager.shared.getFocusedWindow(),
+              let windowFrame = WindowManager.shared.getFrame(of: window) else { return }
+        draggedWindow = window
+        didRestoreFromSnap = false
+        dragGesture.begin(
+            cursor: cursor,
+            windowFrame: windowFrame,
+            titleBarHeight: titleBarHeight
+        )
+    }
+
+    /// Update pending phase; returns false if the gesture was ignored or stalled
+    private func updatePendingDrag(at cursor: CGPoint) -> Bool {
+        guard let window = draggedWindow,
+              let currentWindowPosition = WindowManager.shared.getPosition(of: window) else {
+            dragGesture.ignore()
+            return false
+        }
+        return dragGesture.update(
+            cursor: cursor,
+            windowPosition: currentWindowPosition
+        )
+    }
+
+    /// If the dragged window is currently snapped or maximized, restore it at the cursor.
+    /// Returns true when a restore was triggered (caller should skip overlay update this tick).
+    private func restoreDraggedWindowIfSnapped(at cursor: CGPoint) -> Bool {
+        guard let window = draggedWindow else { return false }
+        if WindowManager.shared.hasPreviousFrame(for: window) {
+            DispatchQueue.main.async {
+                WindowManager.shared.restoreWindowAtCursor(window, cursorCG: cursor)
+            }
+            return true
+        }
+        if WindowManager.shared.isWindowMaximized(window) {
+            DispatchQueue.main.async {
+                WindowManager.shared.restoreFromMaximized(window, cursorCG: cursor)
+            }
+            return true
+        }
+        return false
+    }
+
+    /// Refresh the snap preview overlay if the detected zone changed
+    private func updateOverlayForCursor(_ cursor: CGPoint) {
+        let detectedAction = detectSnapZone(cursor: cursor)
+        guard detectedAction != currentSnapAction else { return }
+        currentSnapAction = detectedAction
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if let action = detectedAction, let screen = self.screenForCursor(cursor) {
+                if let frame = SnapZone.frame(for: action, on: screen) {
+                    SnapOverlayWindow.shared.show(at: frame)
                 }
+            } else {
+                SnapOverlayWindow.shared.hideOverlay()
             }
         }
     }

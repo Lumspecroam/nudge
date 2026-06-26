@@ -42,42 +42,23 @@ final class StatusBarController: NSObject, NSMenuDelegate {
     }
 
     private func buildMenu(_ menu: NSMenu) {
-        // Halves
-        addSnapItem(menu, .leftHalf)
-        addSnapItem(menu, .rightHalf)
-        addSnapItem(menu, .topHalf)
-        addSnapItem(menu, .bottomHalf)
-        menu.addItem(.separator())
-
-        // Quarters
-        addSnapItem(menu, .topLeft)
-        addSnapItem(menu, .topRight)
-        addSnapItem(menu, .bottomLeft)
-        addSnapItem(menu, .bottomRight)
-        menu.addItem(.separator())
-
-        // Thirds
-        addSnapItem(menu, .leftThird)
-        addSnapItem(menu, .centerThird)
-        addSnapItem(menu, .rightThird)
-        menu.addItem(.separator())
-
-        // Two Thirds
-        addSnapItem(menu, .leftTwoThirds)
-        addSnapItem(menu, .centerTwoThirds)
-        addSnapItem(menu, .rightTwoThirds)
-        menu.addItem(.separator())
-
-        // Display
-        addSnapItem(menu, .nextDisplay)
-        addSnapItem(menu, .previousDisplay)
-        menu.addItem(.separator())
-
-        // Maximize / Center / Restore
-        addSnapItem(menu, .maximize)
-        addSnapItem(menu, .center)
-        addSnapItem(menu, .restore)
-        menu.addItem(.separator())
+        // Group actions by category so adding a new category only needs SnapAction.swift
+        let grouped = Dictionary(grouping: SnapAction.allCases, by: \.category)
+        let categoryOrder = [
+            NSLocalizedString("Halves", comment: ""),
+            NSLocalizedString("Quarters", comment: ""),
+            NSLocalizedString("Thirds", comment: ""),
+            NSLocalizedString("Two Thirds", comment: ""),
+            NSLocalizedString("Display", comment: ""),
+            NSLocalizedString("Other", comment: ""),
+        ]
+        for category in categoryOrder {
+            guard let actions = grouped[category], !actions.isEmpty else { continue }
+            for action in actions {
+                addSnapItem(menu, action)
+            }
+            menu.addItem(.separator())
+        }
 
         // Accessibility permission
         if !AccessibilityHelper.shared.isAccessibilityGranted {

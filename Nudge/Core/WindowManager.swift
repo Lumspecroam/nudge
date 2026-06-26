@@ -425,7 +425,7 @@ final class WindowManager {
         let screens = NSScreen.screens
         guard screens.count > 1 else { return }
 
-        let direction = cycleDirection(for: action)
+        let direction = SnapGeometry.cycleDirection(for: action)
         let targetScreen: NSScreen?
         if direction > 0 {
             targetScreen = DisplayHelper.shared.nextScreen(from: screen)
@@ -435,7 +435,7 @@ final class WindowManager {
         guard let nextScreen = targetScreen else { return }
 
         // Mirror the action horizontally when crossing monitors
-        let mirroredAction = mirrorAction(action)
+        let mirroredAction = SnapGeometry.mirrorAction(action)
 
         if let targetFrame = SnapZone.frame(for: mirroredAction, on: nextScreen) {
             let cgFrame = convertToCG(nsFrame: targetFrame, screen: nextScreen)
@@ -443,46 +443,9 @@ final class WindowManager {
         }
     }
 
-    /// Mirror an action horizontally (right↔left, keeping top/bottom)
-    /// For top/bottom half: keep the same shape on the next monitor
-    private func mirrorAction(_ action: SnapAction) -> SnapAction {
-        switch action {
-        case .leftHalf: return .rightHalf
-        case .rightHalf: return .leftHalf
-        case .topLeft: return .topRight
-        case .topRight: return .topLeft
-        case .bottomLeft: return .bottomRight
-        case .bottomRight: return .bottomLeft
-        case .leftThird: return .rightThird
-        case .rightThird: return .leftThird
-        case .leftTwoThirds: return .rightTwoThirds
-        case .rightTwoThirds: return .leftTwoThirds
-        // Top/bottom half: mirror vertically when crossing monitors
-        case .topHalf: return .bottomHalf
-        case .bottomHalf: return .topHalf
-        default: return action
-        }
-    }
-
-    /// Right-side actions cycle right, left-side actions cycle left
-    /// Bottom half cycles right (like rightHalf), top half cycles left (like leftHalf)
-    private func cycleDirection(for action: SnapAction) -> Int {
-        switch action {
-        case .rightHalf, .topRight, .bottomRight, .rightThird, .rightTwoThirds, .bottomHalf:
-            return 1
-        case .leftHalf, .topLeft, .bottomLeft, .leftThird, .leftTwoThirds, .topHalf:
-            return -1
-        default:
-            return 1
-        }
-    }
-
     /// Check if two frames match (within tolerance)
     private func isFrameMatch(_ a: CGRect, _ b: CGRect, tolerance: CGFloat = 15) -> Bool {
-        return abs(a.origin.x - b.origin.x) < tolerance &&
-               abs(a.origin.y - b.origin.y) < tolerance &&
-               abs(a.width - b.width) < tolerance &&
-               abs(a.height - b.height) < tolerance
+        SnapGeometry.isFrameMatch(a, b, tolerance: tolerance)
     }
 
     // MARK: - Special Actions
@@ -553,5 +516,53 @@ final class WindowManager {
         let mainHeight = mainScreen.frame.height
         let cgY = mainHeight - nsFrame.maxY
         return CGRect(x: nsFrame.minX, y: cgY, width: nsFrame.width, height: nsFrame.height)
+    }
+}
+
+// MARK: - Pure helpers (testable in isolation)
+
+/// Pure functions for snap action geometry, mirroring, and cycling.
+/// Extracted from WindowManager so they can be unit-tested without AX dependencies.
+enum SnapGeometry {
+    /// Check if two frames match (within tolerance)
+    static func isFrameMatch(_ a: CGRect, _ b: CGRect, tolerance: CGFloat = 15) -> Bool {
+        return abs(a.origin.x - b.origin.x) < tolerance &&
+               abs(a.origin.y - b.origin.y) < tolerance &&
+               abs(a.width - b.width) < tolerance &&
+               abs(a.height - b.height) < tolerance
+    }
+
+    /// Mirror an action horizontally (right↔left, top/bottom swap vertically)
+    /// Used when cycling across monitors so the snapped edge stays "the same" from user perspective.
+    static func mirrorAction(_ action: SnapAction) -> SnapAction {
+        switch action {
+        case .leftHalf: return .rightHalf
+        case .rightHalf: return .leftHalf
+        case .topLeft: return .topRight
+        case .topRight: return .topLeft
+        case .bottomLeft: return .bottomRight
+        case .bottomRight: return .bottomLeft
+        case .leftThird: return .rightThird
+        case .rightThird: return .leftThird
+        case .leftTwoThirds: return .rightTwoThirds
+        case .rightTwoThirds: return .leftTwoThirds
+        // Top/bottom half: mirror vertically when crossing monitors
+        case .topHalf: return .bottomHalf
+        case .bottomHalf: return .topHalf
+        default: return action
+        }
+    }
+
+    /// Right-side actions cycle right, left-side actions cycle left.
+    /// Top half cycles left, bottom half cycles right (matching the screen edge that triggers them).
+    static func cycleDirection(for action: SnapAction) -> Int {
+        switch action {
+        case .rightHalf, .topRight, .bottomRight, .rightThird, .rightTwoThirds, .bottomHalf:
+            return 1
+        case .leftHalf, .topLeft, .bottomLeft, .leftThird, .leftTwoThirds, .topHalf:
+            return -1
+        default:
+            return 1
+        }
     }
 }

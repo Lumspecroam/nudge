@@ -3,7 +3,24 @@ import Cocoa
 /// Generates consistent 18x18 layout icons for menu items
 struct SnapIconGenerator {
 
+    // MARK: - Cached Icons
+    // Pre-rendered once at first access. Icons are pure functions of `action`
+    // and never change at runtime, so caching eliminates 19× NSImage redraws
+    // every time the status menu opens.
+
+    private static let cache: [SnapAction: NSImage] = {
+        var result = [SnapAction: NSImage](minimumCapacity: SnapAction.allCases.count)
+        for action in SnapAction.allCases {
+            result[action] = renderIcon(for: action)
+        }
+        return result
+    }()
+
     static func icon(for action: SnapAction) -> NSImage {
+        cache[action] ?? renderIcon(for: action)
+    }
+
+    private static func renderIcon(for action: SnapAction) -> NSImage {
         let size = NSSize(width: 18, height: 14)
         let image = NSImage(size: size, flipped: false) { rect in
             let box = NSRect(x: 0.5, y: 0.5, width: rect.width - 1, height: rect.height - 1)
